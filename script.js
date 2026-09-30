@@ -18,17 +18,39 @@ const bounds = [[0, 0], [imageHeight, imageWidth]];
 L.imageOverlay('msmw.webp', bounds).addTo(map);
 map.fitBounds(bounds);
 
+// track current map state so that old markers don't linger when swapping maps
+let currentOverlay = null;
+let currentMarkers = [];
+
+function clearMarkers() {
+    currentMarkers.forEach(m => map.removeLayer(m));
+    currentMarkers = [];
+}
+
+// load a given map with a url
+function loadMap(imageUrl, bounds) {
+    if (currentOverlay) map.removeLayer(currentOverlay);
+
+    currentOverlay = L.imageOverlay(imageUrl, bounds).addTo(map);
+    map.setMaxBounds(bounds);
+    map.fitBounds(bounds);
+}
+
 // define continents
 const continents = [
     {
         name: 'VI',
         center:[315, 80],
-        radius: 65
+        radius: 65,
+        mapImage: 'msvi.webp',
+        mapBounds: [[0, 0], [470, 640]]
     },
     {
         name: 'MI',
         center:[393, 139],
-        radius: 24
+        radius: 24,
+        mapImage: 'msmi.webp',
+        mapBounds: [[0, 0], [455, 640]]
     },
     {
         name: 'AR',
@@ -41,9 +63,9 @@ const continents = [
         radius: 58
     },
     {
-    name: 'EM',
-    center:[270, 380],
-    radius: 80
+        name: 'EM',
+        center:[270, 380],
+        radius: 80
     }
   // ...one polygon per continent
 ];
@@ -101,14 +123,18 @@ function createContinentIcon(radius) {
 continents.forEach(continent => {
     const marker = L.marker(continent.center, {
         icon: createContinentIcon(continent.radius),
-        riseOnHover: true    
+        // riseOnHover: true    
     }).addTo(map);
 
     // attaches a click handler for each marker
     marker.on('click', () => {
-        const bounds = L.latLngBounds(
-            [continent.center[0] - continent.radius, continent.center[1] - continent.radius],
-            [continent.center[0] + continent.radius, continent.center[1] + continent.radius]
-        );
+        loadMap(continent.mapImage, continent.mapBounds);
+        clearMarkers(); // removes world-map continent markers
     });
+
+    currentMarkers.push(marker);
 });
+
+// initialize world map 
+const worldBounds = [[0, 0], [461, 631]];
+loadMap('msmw.webp', worldBounds);
