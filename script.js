@@ -70,43 +70,6 @@ const continents = [
   // ...one polygon per continent
 ];
 
-// temp circle markers for each continent
-// these circles allow for pointer on hover but doesn't have functionality yet
-// const circleVI = L.circle([315, 80], {
-//     color: 'red',
-//     // fillColor: '#f03',
-//     // fillOpacity: 0.5,
-//     radius: 65
-// }).addTo(map);
-
-// const circleMI = L.circle([393, 139], {
-//     color: 'blue',
-//     fillColor: 'rgb(104, 162, 255)',
-//     fillOpacity: 0.5,
-//     radius: 24
-// }).addTo(map);
-
-// const circleAR = L.circle([283, 195], {
-//     color: 'blue',
-//     fillColor: 'rgb(144, 176, 230)',
-//     fillOpacity: 0.5,
-//     radius: 45
-// }).addTo(map);
-
-// const circleLL = L.circle([200, 265], {
-//     color: 'pink',
-//     fillColor: 'rgb(253, 192, 226)',
-//     fillOpacity: 0.5,
-//     radius: 58
-// }).addTo(map);
-
-// const circleEM = L.circle([270, 380], {
-//     color: 'white',
-//     fillColor: 'rgb(130, 130, 130)',
-//     fillOpacity: 0.5,
-//     radius: 80
-// }).addTo(map);
-
 // reusable divIcon function for islands with different radii
 // returns a Leaflet icon object that you can attach to a marker
 function createContinentIcon(radius) {
