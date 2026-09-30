@@ -7,7 +7,12 @@ const map = L.map('map', {
     minZoom: 0,
     maxZoom: 0,
     dragging: false,
-    doubleClickZoom: false // prevents map moving from double clicks
+    zoomControl: false,
+    scrollWheelZoom: false,
+    touchZoom: false,
+    boxZoom: false,
+    doubleClickZoom: false, // prevents map moving from double clicks
+    attributionControl: false
 });
 
 // Maple_World_webp dimensions, may need to adjust later
@@ -30,8 +35,9 @@ function clearMarkers() {
 // load a given map with a url
 function loadMap(imageUrl, bounds) {
     if (currentOverlay) map.removeLayer(currentOverlay);
-
+    // console.log('current overlay before remove:', currentOverlay);
     currentOverlay = L.imageOverlay(imageUrl, bounds).addTo(map);
+    // console.log('current overlay after remove:', currentOverlay);
     map.setMaxBounds(bounds);
     map.fitBounds(bounds);
 }
