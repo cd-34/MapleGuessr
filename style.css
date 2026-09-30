@@ -6,6 +6,11 @@ body {
     background: #00022E;
 }
 
+#map {
+    width: 50vw;
+    height: 50vh;
+}
+
 .continent-marker {
   background: transparent;
   border: none;
