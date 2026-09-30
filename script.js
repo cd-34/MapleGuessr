@@ -35,9 +35,9 @@ function clearMarkers() {
 // load a given map with a url
 function loadMap(imageUrl, bounds) {
     if (currentOverlay) map.removeLayer(currentOverlay);
-    // console.log('current overlay before remove:', currentOverlay);
+    console.log('current overlay before remove:', currentOverlay);
     currentOverlay = L.imageOverlay(imageUrl, bounds).addTo(map);
-    // console.log('current overlay after remove:', currentOverlay);
+    console.log('current overlay after remove:', currentOverlay);
     map.setMaxBounds(bounds);
     map.fitBounds(bounds);
 }
@@ -103,6 +103,8 @@ continents.forEach(continent => {
 
     currentMarkers.push(marker);
 });
+
+
 
 // initialize world map 
 const worldBounds = [[0, 0], [461, 631]];

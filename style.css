@@ -31,3 +31,19 @@ body {
     0 0 15px 5px rgba(255, 225, 53, 0.6),
     0 0 30px 10px rgba(255, 225, 53, 0.3);
 }
+
+#controls {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 8px 20px;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 1;
+    color: black;
+}
