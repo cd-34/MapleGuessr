@@ -20,67 +20,95 @@ map.fitBounds(bounds);
 
 // define continents
 const continents = [
-  {
-    name: 'Victoria Island',
-    center:[315, 80],
-    radius: 65
-  },
-  {
-    name: 'Maple Island',
-    center:[393, 139],
-    radius: 24
-  },
-  {
-    name: 'Elnath Mts.',
+    {
+        name: 'VI',
+        center:[315, 80],
+        radius: 65
+    },
+    {
+        name: 'MI',
+        center:[393, 139],
+        radius: 24
+    },
+    {
+        name: 'AR',
+        center:[283, 195],
+        radius: 45
+    },
+    {
+        name: 'LL',
+        center:[200, 265],
+        radius: 58
+    },
+    {
+    name: 'EM',
     center:[270, 380],
     radius: 80
-  },
-  {
-    name: 'Aqua Road',
-    center:[283, 195],
-    radius: 45
-  },
-  {
-    name: 'Ludus Lake',
-    center:[200, 265],
-    radius: 58
-  }
+    }
   // ...one polygon per continent
 ];
 
 // temp circle markers for each continent
 // these circles allow for pointer on hover but doesn't have functionality yet
-const circleVI = L.circle([315, 80], {
-    color: 'red',
-    // fillColor: '#f03',
-    // fillOpacity: 0.5,
-    radius: 65
-}).addTo(map);
+// const circleVI = L.circle([315, 80], {
+//     color: 'red',
+//     // fillColor: '#f03',
+//     // fillOpacity: 0.5,
+//     radius: 65
+// }).addTo(map);
 
-const circleMI = L.circle([393, 139], {
-    color: 'blue',
-    fillColor: 'rgb(104, 162, 255)',
-    fillOpacity: 0.5,
-    radius: 24
-}).addTo(map);
+// const circleMI = L.circle([393, 139], {
+//     color: 'blue',
+//     fillColor: 'rgb(104, 162, 255)',
+//     fillOpacity: 0.5,
+//     radius: 24
+// }).addTo(map);
 
-const circleEM = L.circle([270, 380], {
-    color: 'white',
-    fillColor: 'rgb(130, 130, 130)',
-    fillOpacity: 0.5,
-    radius: 80
-}).addTo(map);
+// const circleAR = L.circle([283, 195], {
+//     color: 'blue',
+//     fillColor: 'rgb(144, 176, 230)',
+//     fillOpacity: 0.5,
+//     radius: 45
+// }).addTo(map);
 
-const circleAR = L.circle([283, 195], {
-    color: 'blue',
-    fillColor: 'rgb(144, 176, 230)',
-    fillOpacity: 0.5,
-    radius: 45
-}).addTo(map);
+// const circleLL = L.circle([200, 265], {
+//     color: 'pink',
+//     fillColor: 'rgb(253, 192, 226)',
+//     fillOpacity: 0.5,
+//     radius: 58
+// }).addTo(map);
 
-const circleLL = L.circle([200, 265], {
-    color: 'pink',
-    fillColor: 'rgb(253, 192, 226)',
-    fillOpacity: 0.5,
-    radius: 58
-}).addTo(map);
+// const circleEM = L.circle([270, 380], {
+//     color: 'white',
+//     fillColor: 'rgb(130, 130, 130)',
+//     fillOpacity: 0.5,
+//     radius: 80
+// }).addTo(map);
+
+// reusable divIcon function for islands with different radii
+// returns a Leaflet icon object that you can attach to a marker
+function createContinentIcon(radius) {
+    return L.divIcon({
+        className: 'continent-marker',
+        html: `<div class="continent-hitbox" style="width:${radius*2}px; height:${radius*2}px;"></div>`,
+        iconSize: [radius * 2, radius * 2],
+        iconAnchor: [radius, radius] // center the icon on the coordinate
+    });
+}
+
+// iterates over the continents array to create a marker using that continent's radius
+// addTo(map) places the marker onto the Leaflet map
+continents.forEach(continent => {
+    const marker = L.marker(continent.center, {
+        icon: createContinentIcon(continent.radius),
+        riseOnHover: true    
+    }).addTo(map);
+
+    // attaches a click handler for each marker
+    marker.on('click', () => {
+        const bounds = L.latLngBounds(
+            [continent.center[0] - continent.radius, continent.center[1] - continent.radius],
+            [continent.center[0] + continent.radius, continent.center[1] + continent.radius]
+        );
+    });
+});
