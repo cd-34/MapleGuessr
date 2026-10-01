@@ -8,6 +8,7 @@ let currentLevel = 'world';
 let pendingGuess = null;
 const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
+const worldBounds = [[0, 0], [461, 631]]; // map pixel size - might need to change if swapping to HD map
 
 // initialize map
 const map = L.map('map', {
@@ -108,6 +109,13 @@ function addContinentMarkers() {
 }
 
 
-// initialize world map 
-const worldBounds = [[0, 0], [461, 631]];
-loadMap('msmw.webp', worldBounds);
+function loadWorldMap() {
+    loadMap('msmw.webp', worldBounds);
+    clearMarkers();
+    addContinentMarkers();
+    currentLevel = 'world';
+    pendingGuess = null;
+    // updateButtonStates();
+}
+
+loadWorldMap();
