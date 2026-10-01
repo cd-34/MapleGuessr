@@ -1,9 +1,13 @@
+:root {
+    --primary-colour: #00022E;
+}
+
 h1 {
     color: white;
 }
 
 body {
-    background: #00022E;
+    background: var(--primary-colour);
 }
 
 #map {
@@ -46,4 +50,8 @@ button {
 button:disabled {
     opacity: 1;
     color: black;
+}
+
+.leaflet-container {
+    background: var(--primary-colour); 
 }
