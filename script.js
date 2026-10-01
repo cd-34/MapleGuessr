@@ -100,8 +100,8 @@ function addContinentMarkers() {
 
         // attaches a click handler for each marker
         marker.on('click', () => {
-            loadMap(continent.mapImage, continent.mapBounds);
-            clearMarkers(); // removes world-map continent markers
+            loadContinentMap(continent);
+            // clearMarkers(); // removes world-map continent markers
         });
 
         currentMarkers.push(marker);
@@ -115,7 +115,29 @@ function loadWorldMap() {
     addContinentMarkers();
     currentLevel = 'world';
     pendingGuess = null;
-    // updateButtonStates();
+    updateButtonStates();
 }
+
+function loadContinentMap(continent) {
+    loadMap(continent.mapImage, continent.mapBounds);
+    clearMarkers();
+    console.log('clearmarkers should work here');
+    currentLevel = continent.name;
+    console.log('clicked on: ', continent.name);
+    currentLevel = continent.name;
+    pendingGuess = null;
+    updateButtonStates();
+}
+
+function updateButtonStates() {
+    backButton.disabled = (currentLevel === 'world');
+    confirmButton.disabled = (pendingGuess === null);
+}
+
+// back button returns you to the world map with the appropriate markers
+// only enabled when not currently on the world map
+backButton.addEventListener('click', () => {
+    loadWorldMap();
+});
 
 loadWorldMap();
