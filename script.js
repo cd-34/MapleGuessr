@@ -11,17 +11,13 @@ const map = L.map('map', {
     scrollWheelZoom: false,
     touchZoom: false,
     boxZoom: false,
-    doubleClickZoom: false, // prevents map moving from double clicks
+    doubleClickZoom: false, 
     attributionControl: false
 });
 
 // Maple_World_webp dimensions, may need to adjust later
 const imageWidth = 631;
 const imageHeight = 461;
-
-const bounds = [[0, 0], [imageHeight, imageWidth]];
-L.imageOverlay('msmw.webp', bounds).addTo(map);
-map.fitBounds(bounds);
 
 // track current map state so that old markers don't linger when swapping maps
 let currentOverlay = null;
@@ -34,10 +30,14 @@ function clearMarkers() {
 
 // load a given map with a url
 function loadMap(imageUrl, bounds) {
-    if (currentOverlay) map.removeLayer(currentOverlay);
-    console.log('current overlay before remove:', currentOverlay);
+    if (currentOverlay) {
+        console.log('removing layer id: ', currentOverlay._leaflet_id);
+        map.removeLayer(currentOverlay);
+    }
+    // console.log('current overlay before remove:', currentOverlay);
     currentOverlay = L.imageOverlay(imageUrl, bounds).addTo(map);
-    console.log('current overlay after remove:', currentOverlay);
+    console.log('added layer id: ', currentOverlay._leaflet_id);
+    // console.log('current overlay after remove:', currentOverlay);
     map.setMaxBounds(bounds);
     map.fitBounds(bounds);
 }
