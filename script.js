@@ -1,4 +1,13 @@
-const EPOCH = Date.UTC(2026, 10, 6);
+// const EPOCH = Date.UTC(2026, 10, 6); // currently not used
+
+// track current map state so that old markers don't linger when swapping maps
+let currentOverlay = null;
+let currentMarkers = [];
+// track map state to see if we're in the world map or not
+let currentLevel = 'world';
+let pendingGuess = null;
+const backButton = document.getElementById('back-button');
+const confirmButton = document.getElementById('confirm-button');
 
 // initialize map
 const map = L.map('map', {
@@ -15,14 +24,6 @@ const map = L.map('map', {
     attributionControl: false
 });
 
-// Maple_World_webp dimensions, may need to adjust later
-const imageWidth = 631;
-const imageHeight = 461;
-
-// track current map state so that old markers don't linger when swapping maps
-let currentOverlay = null;
-let currentMarkers = [];
-
 function clearMarkers() {
     currentMarkers.forEach(m => map.removeLayer(m));
     currentMarkers = [];
@@ -31,13 +32,13 @@ function clearMarkers() {
 // load a given map with a url
 function loadMap(imageUrl, bounds) {
     if (currentOverlay) {
-        console.log('removing layer id: ', currentOverlay._leaflet_id);
+        // console.log('removing layer id: ', currentOverlay._leaflet_id);
         map.removeLayer(currentOverlay);
     }
-    // console.log('current overlay before remove:', currentOverlay);
+    console.log('current overlay before adding:', currentOverlay);
     currentOverlay = L.imageOverlay(imageUrl, bounds).addTo(map);
     console.log('added layer id: ', currentOverlay._leaflet_id);
-    // console.log('current overlay after remove:', currentOverlay);
+    console.log('current overlay after adding:', currentOverlay);
     map.setMaxBounds(bounds);
     map.fitBounds(bounds);
 }
@@ -89,21 +90,22 @@ function createContinentIcon(radius) {
 
 // iterates over the continents array to create a marker using that continent's radius
 // addTo(map) places the marker onto the Leaflet map
-continents.forEach(continent => {
-    const marker = L.marker(continent.center, {
-        icon: createContinentIcon(continent.radius),
-        // riseOnHover: true    
-    }).addTo(map);
+function addContinentMarkers() {
+    continents.forEach(continent => {
+        const marker = L.marker(continent.center, {
+            icon: createContinentIcon(continent.radius),
+            // riseOnHover: true    
+        }).addTo(map);
 
-    // attaches a click handler for each marker
-    marker.on('click', () => {
-        loadMap(continent.mapImage, continent.mapBounds);
-        clearMarkers(); // removes world-map continent markers
+        // attaches a click handler for each marker
+        marker.on('click', () => {
+            loadMap(continent.mapImage, continent.mapBounds);
+            clearMarkers(); // removes world-map continent markers
+        });
+
+        currentMarkers.push(marker);
     });
-
-    currentMarkers.push(marker);
-});
-
+}
 
 
 // initialize world map 
