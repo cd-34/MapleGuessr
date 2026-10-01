@@ -5,7 +5,10 @@ let currentOverlay = null;
 let currentMarkers = [];
 // track map state to see if we're in the world map or not
 let currentLevel = 'world';
+// used for confirm button
 let pendingGuess = null;
+// used for confirm button
+let selectedNode = null;
 const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
 const worldBounds = [[0, 0], [461, 631]]; // map pixel size - might need to change if swapping to HD map
@@ -51,7 +54,12 @@ const continents = [
         center:[315, 80],
         radius: 65,
         mapImage: 'msvi.webp',
-        mapBounds: [[0, 0], [470, 640]]
+        mapBounds: [[0, 0], [470, 640]],
+        nodes: [
+            { id: 'VI-1', center: [240, 400], radius: 30, correct: true },
+            { id: 'VI-2', center: [200, 300], radius: 30, correct: false },
+            { id: 'VI-3', center: [210, 200], radius: 30, correct: false }
+        ]
     },
     {
         name: 'MI',
@@ -108,6 +116,31 @@ function addContinentMarkers() {
     });
 }
 
+// iterates through the list of nodes for the selected continent
+// and adds markers based on their center
+function addGuessNodeMarkers(continent) {
+    continent.nodes.forEach(node => {
+        const marker = L.marker(node.center, {
+            icon: createContinentIcon(node.radius) 
+        }).addTo(map);
+
+        marker.on('click', () => {
+            selectNode(node, marker);
+        })
+
+        currentMarkers.push(marker);
+    })
+}
+
+// allows players to click on nodes 
+function selectNode(node, marker) {
+    selectedNode = node;
+    pendingGuess = node.id;
+
+    // need to add pop-up name and different highlighting colour
+
+    updateButtonStates();
+}
 
 function loadWorldMap() {
     loadMap('msmw.webp', worldBounds);
@@ -121,11 +154,13 @@ function loadWorldMap() {
 function loadContinentMap(continent) {
     loadMap(continent.mapImage, continent.mapBounds);
     clearMarkers();
-    console.log('clearmarkers should work here');
+    // console.log('clearmarkers should work here');
     currentLevel = continent.name;
-    console.log('clicked on: ', continent.name);
+    // console.log('clicked on: ', continent.name);
     currentLevel = continent.name;
     pendingGuess = null;
+    selectedNode = null;
+    addGuessNodeMarkers(continent);
     updateButtonStates();
 }
 
