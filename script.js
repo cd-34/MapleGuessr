@@ -11,6 +11,7 @@ let selectedNode = null;
 const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
 const worldBounds = [[0, 0], [461, 631]]; // map pixel size - might need to change if swapping to HD map
+const hintImage = document.getElementById('hint-image');
 
 // initialize map
 const map = L.map('map', {
@@ -46,7 +47,13 @@ function loadMap(imageUrl, bounds) {
     map.fitBounds(bounds);
 }
 
-// define continents
+const dailyPuzzle = {
+    hintImage: 'hints/2026-10-02.png',
+    correctContinent: 'VI',
+    correctNode: 'VI-1',
+}
+
+// define continents as an array of objects
 const continents = [
     {
         name: 'VI',
@@ -224,5 +231,8 @@ confirmButton.addEventListener('click', () => {
     const correct = selectedNode.correct;
     console.log(`selected ${selectedNode.id}, correct: ${correct}`);
 });
+
+hintImage.src = dailyPuzzle.hintImage;
+hintImage.alt = 'Hint';
 
 loadWorldMap();

@@ -5,7 +5,7 @@
     /* --node-color: #ffcc22; */
 }
 
-h1 {
+h1, h2 {
     color: white;
 }
 
@@ -92,4 +92,11 @@ might need to make smaller */
 .selected-node .node-dot {
     background: #ff0000;
     box-shadow: 0 0 12px 2px #ff7373;
+}
+
+#hint-image {
+    height: 150px;
+    width: 150px;
+    border-radius: 4px;
+    display: block;
 }
