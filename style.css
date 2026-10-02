@@ -72,8 +72,8 @@ might need to make smaller */
 
 /* box shadow on hovering node */
 .node-hitbox:hover {
-    background: #ff0000;
-    box-shadow: 0 0 15px 5px #ff0000;
+    background: var(--node-color);
+    box-shadow: 0 0 15px 1px gray;
 }
 
 /* selected node changes colour */
@@ -91,5 +91,5 @@ might need to make smaller */
 /* changes how the node appears once selected*/
 .selected-node .node-dot {
     background: #ff0000;
-    box-shadow: 0 0 12px 2px #ff6363;
+    box-shadow: 0 0 12px 2px #ff7373;
 }
