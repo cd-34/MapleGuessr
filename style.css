@@ -3,14 +3,29 @@
     --node-color: #ffee55;
     /* alternative node colour:  */
     /* --node-color: #ffcc22; */
+    cursor: url('cursor/point.cur') 16 16, auto;
 }
 
 h1, h2 {
     color: white;
 }
 
+/* temporary fix to have the cursor work on most of the web page */
+html, body {
+    min-height: 100%;
+    margin: 0;
+}
+
 body {
     background: var(--primary-colour);
+
+}
+
+body:active,
+.continent-hitbox:active,
+.node-hitbox:active,
+button:active {
+    cursor: url('cursor/point_low.cur') 16 16, auto;
 }
 
 #game-container {
@@ -36,7 +51,8 @@ body {
     border-radius: 50%; 
     background: transparent;
     transition: all 0.2s ease;
-    cursor: pointer;
+    /* cursor repeated in button and node-hitbox - bad? */
+
 }
 
 .continent-hitbox:hover {
@@ -44,6 +60,7 @@ body {
     box-shadow:
     0 0 15px 5px rgba(255, 225, 53, 0.6),
     0 0 30px 10px rgba(255, 225, 53, 0.3);
+    cursor: url('cursor/point_click.cur') 16 16, auto; 
 }
 
 #controls {
@@ -54,12 +71,23 @@ body {
 
 button {
     padding: 8px 20px;
-    cursor: pointer;
+    cursor: url('cursor/point_click.cur') 16 16, auto; 
 }
 
 button:disabled {
     opacity: 1;
     color: black;
+    /* cursor here? */
+}
+
+.leaflet-interactive {
+    cursor: inherit;
+}
+
+.leaflet-interactive.continent-hitbox:hover,
+.leaflet-interactive.node-hitbox:hover,
+button:hover {
+    cursor: url('cursor/point_click.cur') 16 16, auto;
 }
 
 .leaflet-container {
@@ -74,13 +102,14 @@ might need to make smaller */
     border-radius: 50%;
     background: #343434;
     box-shadow: 0 0 1px 1px #343434;
-    cursor: pointer;
+    cursor: url('cursor/point_click.cur') 16 16, auto; 
 }
 
 /* box shadow on hovering node */
 .node-hitbox:hover {
     background: var(--node-color);
     box-shadow: 0 0 15px 1px gray;
+    cursor: url('cursor/point_click.cur') 16 16, auto; 
 }
 
 /* selected node changes colour */
