@@ -3,7 +3,7 @@
     --node-color: #ffee55;
     /* alternative node colour:  */
     /* --node-color: #ffcc22; */
-    cursor: url('cursor/point.cur') 16 16, auto;
+    cursor: url('cursor/point.cur') 0 0, auto;
 }
 
 h1, h2 {
@@ -25,7 +25,7 @@ body:active,
 .continent-hitbox:active,
 .node-hitbox:active,
 button:active {
-    cursor: url('cursor/point_low.cur') 16 16, auto;
+    cursor: url('cursor/point_low.cur') 0 0, auto;
 }
 
 #game-container {
@@ -60,7 +60,7 @@ button:active {
     box-shadow:
     0 0 15px 5px rgba(255, 225, 53, 0.6),
     0 0 30px 10px rgba(255, 225, 53, 0.3);
-    cursor: url('cursor/point_click.cur') 16 16, auto; 
+    cursor: url('cursor/point_click.cur') 0 0, auto; 
 }
 
 #controls {
@@ -71,7 +71,7 @@ button:active {
 
 button {
     padding: 8px 20px;
-    cursor: url('cursor/point_click.cur') 16 16, auto; 
+    cursor: url('cursor/point_click.cur') 0 0, auto; 
 }
 
 button:disabled {
@@ -87,7 +87,7 @@ button:disabled {
 .leaflet-interactive.continent-hitbox:hover,
 .leaflet-interactive.node-hitbox:hover,
 button:hover {
-    cursor: url('cursor/point_click.cur') 16 16, auto;
+    cursor: url('cursor/point_click.cur') 0 0, auto;
 }
 
 .leaflet-container {
@@ -102,14 +102,20 @@ might need to make smaller */
     border-radius: 50%;
     background: #343434;
     box-shadow: 0 0 1px 1px #343434;
-    cursor: url('cursor/point_click.cur') 16 16, auto; 
+    cursor: url('cursor/point_click.cur') 0 0, auto; 
+}
+
+.node-marker {
+    background: transparent;
+    border: none;
 }
 
 /* box shadow on hovering node */
 .node-hitbox:hover {
     background: var(--node-color);
     box-shadow: 0 0 15px 1px gray;
-    cursor: url('cursor/point_click.cur') 16 16, auto; 
+    cursor: url('cursor/point_click.cur') 0 0, auto; 
+    box-sizing: border-box;
 }
 
 /* selected node changes colour */
