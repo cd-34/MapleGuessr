@@ -1,5 +1,6 @@
 :root {
     --primary-colour: #00022E;
+    --node-color: #ffcc22;
 }
 
 h1 {
@@ -54,4 +55,39 @@ button:disabled {
 
 .leaflet-container {
     background: var(--primary-colour); 
+}
+
+/* changes colour of the hitbox
+might need to make smaller */
+.node-hitbox {
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    background: #343434;
+    box-shadow: 0 0 1px 1px #343434;
+    cursor: pointer;
+}
+
+/* box shadow on hovering node */
+.node-hitbox:hover {
+    background: #ff0000;
+    box-shadow: 0 0 15px 5px #ff0000;
+}
+
+/* selected node changes colour */
+.selected-node .node-hitbox {
+    background: #ff0000;
+    box-shadow: 0 0 12px 2px #ff0000;
+}
+
+/* how the node appears on the map */
+.node-dot {
+    border-radius: 50%;
+    background: var(--node-color);
+}
+
+/* changes how the node appears once selected*/
+.selected-node .node-dot {
+    background: #ff0000;
+    box-shadow: 0 0 12px 2px #ff6363;
 }

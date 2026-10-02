@@ -50,14 +50,23 @@ function loadMap(imageUrl, bounds) {
 const continents = [
     {
         name: 'VI',
-        center:[315, 80],
+        center: [315, 80],
         radius: 65,
         mapImage: 'msvi.webp',
         mapBounds: [[0, 0], [470, 640]],
         nodes: [
-            { id: 'VI-1', center: [240, 400], radius: 30, correct: true },
-            { id: 'VI-2', center: [200, 300], radius: 30, correct: false },
-            { id: 'VI-3', center: [210, 200], radius: 30, correct: false }
+            // center [vertical bottom up, horizontal left to right]
+            // the node starts in the top left and has a radius
+            // https://pixspy.com/ gives 101, 374 
+            // flip the numbers, so 374, 101
+            // first number subtract from 459, second number add 8
+            // 83, 113
+                // once I finalize the map size and make sure it scales properly 
+                // I'll create a function to convert this automatically
+            // radius affects the hitbox size 
+            { id: 'LH', center: [85, 110], radius: 15, correct: true },
+            { id: 'H', center: [82, 300], radius: 15, correct: false },
+            { id: 'E', center: [208, 453], radius: 15, correct: false }
         ]
     },
     {
@@ -65,22 +74,40 @@ const continents = [
         center:[393, 139],
         radius: 24,
         mapImage: 'msmi.webp',
-        mapBounds: [[0, 0], [455, 640]]
+        mapBounds: [[0, 0], [455, 640]],
+        nodes: [
+            { id: 'temp', center: [83, 117], radius: 25, correct: true }
+        ]
     },
     {
         name: 'AR',
         center:[283, 195],
-        radius: 45
+        radius: 45,
+        // mapImage: 'link',
+        // mapBounds: [[0, 0], [455, 640]],
+        nodes: [
+            { id: 'temp', center: [83, 117], radius: 25, correct: true }
+        ]
     },
     {
         name: 'LL',
         center:[200, 265],
-        radius: 58
+        radius: 58,
+        // mapImage: 'link',
+        // mapBounds: [[0, 0], [455, 640]],
+        nodes: [
+            { id: 'temp', center: [83, 117], radius: 25, correct: true }
+        ]
     },
     {
         name: 'EM',
         center:[270, 380],
-        radius: 80
+        radius: 80,
+        // mapImage: 'link',
+        // mapBounds: [[0, 0], [455, 640]],
+        nodes: [
+            { id: 'temp', center: [83, 117], radius: 25, correct: true }
+        ]
     }
   // ...one polygon per continent
 ];
@@ -120,7 +147,7 @@ function addContinentMarkers() {
 function addGuessNodeMarkers(continent) {
     continent.nodes.forEach(node => {
         const marker = L.marker(node.center, {
-            icon: createContinentIcon(node.radius) 
+            icon: createNodeIcon(node.radius) 
         }).addTo(map);
 
         marker.on('click', () => {
@@ -132,13 +159,29 @@ function addGuessNodeMarkers(continent) {
 }
 
 // allows players to click on nodes 
-function selectNode(node) {
+function selectNode(node, marker) {
     selectedNode = node;
     pendingGuess = node.id;
 
     // need to add pop-up name and different highlighting colour
+    currentMarkers.forEach(m => m.getElement()?.classList.remove('selected-node'));
+    marker.getElement()?.classList.add('selected-node');
 
     updateButtonStates();
+}
+
+function createNodeIcon(radius, dotSize = 14) {
+    return L.divIcon({
+        className: 'node-marker',
+        // border for each node
+        html: `
+            <div class="node-hitbox" style="width:${radius * 1.01}px; height:${radius * 1.01}px;">
+                <div class="node-dot" style="width:${dotSize}px; height:${dotSize}px;"></div>
+            </div>
+        `,
+        iconSize: [radius * 2, radius * 2],
+        iconAnchor: [radius, radius]
+    })
 }
 
 function loadWorldMap() {
