@@ -13,28 +13,35 @@ body {
     background: var(--primary-colour);
 }
 
+#game-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
 #map {
-    width: 50vw;
-    height: 50vh;
+    width: 640px;
+    height: 470px;
+    flex-shrink: 0;
 }
 
 .continent-marker {
-  background: transparent;
-  border: none;
+    background: transparent;
+    border: none;
 }
 
 .continent-hitbox {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%; 
-  background: transparent;
-  transition: all 0.2s ease;
-  cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; 
+    background: transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .continent-hitbox:hover {
-  background: rgba(255, 225, 53, 0.25);
-  box-shadow:
+    background: rgba(255, 225, 53, 0.25);
+    box-shadow:
     0 0 15px 5px rgba(255, 225, 53, 0.6),
     0 0 30px 10px rgba(255, 225, 53, 0.3);
 }
@@ -94,9 +101,19 @@ might need to make smaller */
     box-shadow: 0 0 12px 2px #ff7373;
 }
 
+#hint {
+    width: 200px;
+    height: 100%;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 16px;
+    box-sizing: border-box;
+}
+
 #hint-image {
-    height: 150px;
-    width: 150px;
+    /* height: 150px;
+    width: 150px; */
     border-radius: 4px;
     display: block;
 }
