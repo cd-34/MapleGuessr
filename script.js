@@ -10,7 +10,7 @@ let pendingGuess = null;
 let selectedNode = null;
 const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
-const worldBounds = [[0, 0], [461, 631]]; // map pixel size - might need to change if swapping to HD map
+const worldBounds = [[0, 0], [470, 640]]; // map pixel size - might need to change if swapping to HD map
 const hintImage = document.getElementById('hint-image');
 
 // initialize map
@@ -192,7 +192,7 @@ function createNodeIcon(radius, dotSize = 14) {
 }
 
 function loadWorldMap() {
-    loadMap('msmw.webp', worldBounds);
+    loadMap('msmw-resized.png', worldBounds);
     clearMarkers();
     addContinentMarkers();
     currentLevel = 'world';
