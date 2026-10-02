@@ -5,9 +5,8 @@ let currentOverlay = null;
 let currentMarkers = [];
 // track map state to see if we're in the world map or not
 let currentLevel = 'world';
-// used for confirm button
+// pendingGuess and selectedNode used for confirm button
 let pendingGuess = null;
-// used for confirm button
 let selectedNode = null;
 const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
@@ -39,10 +38,10 @@ function loadMap(imageUrl, bounds) {
         // console.log('removing layer id: ', currentOverlay._leaflet_id);
         map.removeLayer(currentOverlay);
     }
-    console.log('current overlay before adding:', currentOverlay);
+    // console.log('current overlay before adding:', currentOverlay);
     currentOverlay = L.imageOverlay(imageUrl, bounds).addTo(map);
-    console.log('added layer id: ', currentOverlay._leaflet_id);
-    console.log('current overlay after adding:', currentOverlay);
+    // console.log('added layer id: ', currentOverlay._leaflet_id);
+    // console.log('current overlay after adding:', currentOverlay);
     map.setMaxBounds(bounds);
     map.fitBounds(bounds);
 }
@@ -133,7 +132,7 @@ function addGuessNodeMarkers(continent) {
 }
 
 // allows players to click on nodes 
-function selectNode(node, marker) {
+function selectNode(node) {
     selectedNode = node;
     pendingGuess = node.id;
 
@@ -173,6 +172,14 @@ function updateButtonStates() {
 // only enabled when not currently on the world map
 backButton.addEventListener('click', () => {
     loadWorldMap();
+});
+
+confirmButton.addEventListener('click', () => {
+    if (!selectedNode) {
+        return;
+    }
+    const correct = selectedNode.correct;
+    console.log(`selected ${selectedNode.id}, correct: ${correct}`);
 });
 
 loadWorldMap();
