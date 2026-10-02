@@ -1,6 +1,8 @@
 :root {
     --primary-colour: #00022E;
-    --node-color: #ffcc22;
+    --node-color: #ffee55;
+    /* alternative node colour:  */
+    /* --node-color: #ffcc22; */
 }
 
 h1 {
