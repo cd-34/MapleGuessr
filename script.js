@@ -190,6 +190,10 @@ function selectNode(node, marker) {
     currentMarkers.forEach(m => m.getElement()?.classList.remove('selected-node'));
     marker.getElement()?.classList.add('selected-node');
 
+    currentMarkers.forEach(m => {
+        m.getElement()?.querySelector('.popuptext')?.classList.remove('show');
+    });
+
     // grabs a reference to the specific marker and produces a popup for 2 seconds
     const popupEl = marker.getElement()?.querySelector('.popuptext');
     if (popupEl) {
