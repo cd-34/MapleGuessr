@@ -1,6 +1,7 @@
 :root {
     --primary-colour: #00022E;
     --node-color: #ffee55;
+    --town-color: #2fc7fc;
     /* alternative node colour:  */
     /* --node-color: #ffcc22; */
     cursor: url('cursor/point.cur') 0 0, auto;
@@ -179,6 +180,11 @@ might need to make smaller */
 .node-dot {
     border-radius: 50%;
     background: var(--node-color);
+}
+
+.node-town .node-dot {
+    border-radius: 50%;
+    background: var(--town-color);
 }
 
 /* changes how the node appears once selected*/

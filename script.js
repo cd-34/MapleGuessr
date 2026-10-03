@@ -81,9 +81,9 @@ const continents = [
                 // once I finalize the map size and make sure it scales properly 
                 // I'll create a function to convert this automatically
             // radius affects the hitbox size 
-            { id: 'LH', center: [85, 110], radius: 15 },
-            { id: 'H', center: [82, 300], radius: 15 },
-            { id: 'E', center: [208, 453], radius: 15 }
+            { id: 'LH', center: [85, 110], radius: 15, type: 'town' },
+            { id: 'H', center: [82, 300], radius: 15, type: 'town' },
+            { id: 'E', center: [208, 453], radius: 15, type: 'regular' }
         ]
     },
     {
@@ -93,7 +93,7 @@ const continents = [
         mapImage: 'msmi.webp',
         mapBounds: [[0, 0], [455, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25 }
+            { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
         ]
     },
     {
@@ -103,7 +103,7 @@ const continents = [
         // mapImage: 'link',
         // mapBounds: [[0, 0], [455, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25 }
+            { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
         ]
     },
     {
@@ -113,7 +113,7 @@ const continents = [
         // mapImage: 'link',
         // mapBounds: [[0, 0], [455, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25 }
+            { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
         ]
     },
     {
@@ -123,7 +123,7 @@ const continents = [
         // mapImage: 'link',
         // mapBounds: [[0, 0], [455, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25 }
+            { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
         ]
     }
   // ...one polygon per continent
@@ -164,7 +164,7 @@ function addContinentMarkers() {
 function addGuessNodeMarkers(continent) {
     continent.nodes.forEach(node => {
         const marker = L.marker(node.center, {
-            icon: createNodeIcon(node.radius) 
+            icon: createNodeIcon(node.radius, node.type) 
         }).addTo(map);
 
         marker.on('click', () => {
@@ -209,15 +209,17 @@ function selectNode(node, marker) {
     updateButtonStates();
 }
 
-function createNodeIcon(radius, dotSize = 14) {
+function createNodeIcon(radius, type = 'regular', dotSize = 14) {
     return L.divIcon({
         className: 'node-marker',
         // border for each node
         html: `
-            <div class="node-hitbox" style="width:${radius * 1.01}px; height:${radius * 1.01}px;">
-                <div class="node-dot" style="width:${dotSize}px; height:${dotSize}px;"></div>
+            <div class="copy-popup-wrapper">
+                <div class="node-hitbox node-${type}" style="width:${radius * 1.01}px; height:${radius * 1.01}px;">
+                    <div class="node-dot" style="width:${dotSize}px; height:${dotSize}px;"></div>
+                </div>
+                <span class="copy-popuptext"></span>
             </div>
-            <span class="popuptext">Node</span>
         `,
         iconSize: [radius * 2, radius * 2],
         iconAnchor: [radius, radius]
