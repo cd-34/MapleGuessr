@@ -226,8 +226,9 @@ confirmButton.addEventListener('click', () => {
     if (!selectedNode) {
         return;
     }
-    // const correct = selectedNode.correct;
-    console.log(`selected ${selectedNode.id}`);
+    const correct = currentLevel === todaysPuzzle.continent && selectedNode.id === todaysPuzzle.node;
+    console.log(`dailyPuzzle.continent: ${todaysPuzzle.continent}, selectedNode.id: ${todaysPuzzle.node}`)
+    console.log(`selected ${selectedNode.id}, correct: ${correct}`);
 });
 
 // returns todays date as a string for finding the correct hint file
@@ -239,6 +240,8 @@ function getTodaysDate() {
     // console.log(`${yyyy}-${mm}-${dd}`);
     return `${yyyy}-${mm}-${dd}`;
 }
+
+const todaysPuzzle = dailyPuzzle[getTodaysDate()];
 
 hintImage.src = `hints/${getTodaysDate()}.png`; // currently producing error in console because of current refactor
 hintImage.alt = 'Hint';
