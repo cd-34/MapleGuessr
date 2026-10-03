@@ -17,16 +17,38 @@
 <body>
     <h1>MapleGuessr</h1>
     <div id="game-container">
-        <div id="map"></div>
         <div id="hint">
             <h2>Hint</h2>
             <img id="hint-image" src="" alt="Hint">
+            <button id="help-button" type="button" disabled>How to play</button>
+        </div>
+        <div id="map"></div>
+        <div id="guess-stack">
+            2 guesses remaining.<br>
+            <br>
+            in orange: Right continent - "Henesys: Road to qweqwe"<br>
+            <br>
+            in red: Wrong continent - "Elnath: Road to qweqweqwe"<br>
         </div>
     </div>
 
     <div id="controls">
         <button id="back-button" type="button" disabled>Back</button>
         <button id="confirm-button" disabled>Confirm</button>
+        <button id="give-up-button" type="button">Give Up</button>
     </div>
+
+    <dialog class="dialog">
+        <div class="dialog-header">
+            Give up?
+        </div>
+        <div class="dialog-body">
+            How To Play MapleGuessr
+        </div>
+    </dialog>
+    <script>
+        // shows dialog permanently for debugging purposes
+        // document.querySelector('.dialog').showModal()
+    </script>
 </body>
 </html>

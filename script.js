@@ -8,6 +8,8 @@ let pendingGuess = null;
 let selectedNode = null;
 const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
+const helpButton = document.getElementById('help-button');
+const giveUpButton = document.getElementById('give-up-button');
 const worldBounds = [[0, 0], [470, 640]]; // map pixel size - might need to change if swapping to HD map
 const hintImage = document.getElementById('hint-image');
 
@@ -232,6 +234,15 @@ confirmButton.addEventListener('click', () => {
     console.log(`dailyPuzzle.continent: ${todaysPuzzle.continent}, selectedNode.id: ${todaysPuzzle.node}`)
     console.log(`selected ${selectedNode.id}, correct: ${correct}`);
 });
+
+helpButton.addEventListener('click', () => {
+    console.log(`elp ` + Date.now());
+})
+
+giveUpButton.addEventListener('click', () => {
+    console.log(`give up ` + Date.now());
+    // #FEB2B2
+})
 
 // returns todays date as a string for finding the correct hint file
 function getTodaysDate() {
