@@ -6,12 +6,18 @@ let currentLevel = 'world';
 // pendingGuess and selectedNode used for confirm button
 let pendingGuess = null;
 let selectedNode = null;
+let guesses = [];
+let gameOver = false;
+
+
 const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
 const helpButton = document.getElementById('help-button');
 const giveUpButton = document.getElementById('give-up-button');
 const worldBounds = [[0, 0], [470, 640]]; // map pixel size - might need to change if swapping to HD map
 const hintImage = document.getElementById('hint-image');
+const MAX_GUESSES = 5;
+const guessStack = document.getElementById('guess-stack');
 
 // initialize map
 const map = L.map('map', {
@@ -170,6 +176,9 @@ function selectNode(node, marker) {
     selectedNode = node;
     pendingGuess = node.id;
 
+    if (gameOver) {
+        return;
+    }
     // need to add pop-up name and different highlighting colour
     currentMarkers.forEach(m => m.getElement()?.classList.remove('selected-node'));
     marker.getElement()?.classList.add('selected-node');
@@ -215,7 +224,7 @@ function loadContinentMap(continent) {
 
 function updateButtonStates() {
     backButton.disabled = (currentLevel === 'world');
-    confirmButton.disabled = (pendingGuess === null);
+    confirmButton.disabled = gameOver || (pendingGuess === null);
 }
 
 // back button returns you to the world map with the appropriate markers
@@ -230,9 +239,23 @@ confirmButton.addEventListener('click', () => {
     if (!selectedNode) {
         return;
     }
+    // guesses array is filled by renderGuesses
+    if (guesses.length >= MAX_GUESSES) {
+        return;
+    }
+
+    const result = recordGuess(currentLevel, selectedNode.id);
+    if (result === 'correct' || guesses.length >= MAX_GUESSES) {
+        gameOver = true;
+    }
+
     const correct = currentLevel === todaysPuzzle.continent && selectedNode.id === todaysPuzzle.node;
     console.log(`dailyPuzzle.continent: ${todaysPuzzle.continent}, selectedNode.id: ${todaysPuzzle.node}`)
     console.log(`selected ${selectedNode.id}, correct: ${correct}`);
+
+    pendingGuess = null;
+    selectedNode = null;
+    updateButtonStates();
 });
 
 helpButton.addEventListener('click', () => {
@@ -256,5 +279,31 @@ function getTodaysDate() {
 
 hintImage.src = `hints/${getTodaysDate()}.png`; // currently producing error in console because of current refactor
 hintImage.alt = 'Hint';
+
+function recordGuess(continent, node) {
+    let result;
+    if (continent === todaysPuzzle.continent && node === todaysPuzzle.node) {
+        result = 'correct';
+    } else if (continent === todaysPuzzle.continent) {
+        result = 'partial';
+    } else {
+        result = 'wrong';
+    }
+
+    guesses.push({ continent, node, result });
+    renderGuesses();
+    return result;
+}
+
+// adds guesses to the stack
+function renderGuesses() {
+    guessStack.innerHTML = '';
+    guesses.forEach((guess, index) => {
+        const box = document.createElement('div');
+        box.className = `guess-box ${guess.result}`;
+        box.textContent = `#${index + 1}: ${guess.continent}-${guess.node}`;
+        guessStack.appendChild(box);
+    });
+}
 
 loadWorldMap();
