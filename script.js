@@ -280,6 +280,7 @@ function getTodaysDate() {
 hintImage.src = `hints/${getTodaysDate()}.png`; // currently producing error in console because of current refactor
 hintImage.alt = 'Hint';
 
+// used for colour coding and for the confirmButton to check if game is over
 function recordGuess(continent, node) {
     let result;
     if (continent === todaysPuzzle.continent && node === todaysPuzzle.node) {

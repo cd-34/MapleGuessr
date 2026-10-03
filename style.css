@@ -62,13 +62,33 @@ button:active {
     grid-column: 4;
     justify-self: start;
     box-sizing: border-box;
-    color: white;
+    color: #00075D;
 }
 
 #guess-stack {
     display: flex;
     flex-direction: column-reverse;
     gap: 8px;
+}
+
+/* created by renderGuesses and not in the html */
+.guess-box {
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+}
+
+.guess-box.correct {
+    background: #E2ECC0;
+}
+
+.guess-box.partial {
+    background: #FAD5B3;
+}
+
+.guess-box.wrong {
+    background: #F8AFAF;
 }
 
 .continent-marker {
