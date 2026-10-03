@@ -222,6 +222,8 @@ backButton.addEventListener('click', () => {
     loadWorldMap();
 });
 
+const todaysPuzzle = dailyPuzzle[getTodaysDate()];
+
 confirmButton.addEventListener('click', () => {
     if (!selectedNode) {
         return;
@@ -240,8 +242,6 @@ function getTodaysDate() {
     // console.log(`${yyyy}-${mm}-${dd}`);
     return `${yyyy}-${mm}-${dd}`;
 }
-
-const todaysPuzzle = dailyPuzzle[getTodaysDate()];
 
 hintImage.src = `hints/${getTodaysDate()}.png`; // currently producing error in console because of current refactor
 hintImage.alt = 'Hint';
