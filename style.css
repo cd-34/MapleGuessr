@@ -220,3 +220,56 @@ might need to make smaller */
 .dialog_header {
 
 }
+
+#share-button {
+    visibility: hidden;
+}
+
+#share-button.visible {
+    visibility: visible;
+}
+
+.copy-popup-wrapper {
+    position: relative;
+    display: inline-block;
+    align-items: center;
+}
+
+/* The actual popup bubble */
+.copy-popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; 
+    left: 50%;
+    transform: translateX(-100%) translateY(-60%); 
+    font-size: 0.85rem;
+}
+
+.copy-popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* Toggle class that reveals it with a fade */
+.copy-popuptext.show {
+    visibility: visible;
+    animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

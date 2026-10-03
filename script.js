@@ -8,6 +8,7 @@ let pendingGuess = null;
 let selectedNode = null;
 let guesses = [];
 let gameOver = false;
+let copyPopupTimeout = null;
 
 
 const backButton = document.getElementById('back-button');
@@ -15,6 +16,7 @@ const confirmButton = document.getElementById('confirm-button');
 const helpButton = document.getElementById('help-button');
 const giveUpButton = document.getElementById('give-up-button');
 const shareButton = document.getElementById('share-button');
+const copyPopup = document.getElementById('copy-popup');
 const worldBounds = [[0, 0], [470, 640]]; // map pixel size - might need to change if swapping to HD map
 const hintImage = document.getElementById('hint-image');
 const MAX_GUESSES = 5;
@@ -226,9 +228,7 @@ function loadContinentMap(continent) {
 function updateButtonStates() {
     backButton.disabled = (currentLevel === 'world');
     confirmButton.disabled = gameOver || (pendingGuess === null);
-    if (gameOver) {
-        shareButton.style.display = `inline-block`;
-    }
+    shareButton.classList.toggle('visible', gameOver);
 }
 
 // back button returns you to the world map with the appropriate markers
@@ -273,11 +273,24 @@ giveUpButton.addEventListener('click', () => {
     // #FEB2B2
 })
 
+function showCopyPopup(message = 'Copied to clipboard!') {
+    copyPopup.textContent = message;
+    copyPopup.classList.add('show');
+
+    clearTimeout(copyPopupTimeout);
+    copyPopupTimeout = setTimeout(() => {
+        copyPopup.classList.remove('show');
+    }, 2000);
+}
+
 shareButton.addEventListener('click', () => {
     const text = generateShareText();
-    navigator.clipboard.writeText(text); 
+    navigator.clipboard.writeText(text)
+        .then(() => showCopyPopup('Copied to clipboard!')
+    );
+    copyPopup.classList.toggle("show");
     console.log('copied');
-    shareButton.textContent = 'Copied!';
+    // popup here
 })
 
 // returns todays date as a string for finding the correct hint file
