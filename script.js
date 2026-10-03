@@ -14,6 +14,7 @@ const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
 const helpButton = document.getElementById('help-button');
 const giveUpButton = document.getElementById('give-up-button');
+const shareButton = document.getElementById('share-button');
 const worldBounds = [[0, 0], [470, 640]]; // map pixel size - might need to change if swapping to HD map
 const hintImage = document.getElementById('hint-image');
 const MAX_GUESSES = 5;
@@ -225,6 +226,9 @@ function loadContinentMap(continent) {
 function updateButtonStates() {
     backButton.disabled = (currentLevel === 'world');
     confirmButton.disabled = gameOver || (pendingGuess === null);
+    if (gameOver) {
+        shareButton.style.display = `inline-block`;
+    }
 }
 
 // back button returns you to the world map with the appropriate markers
@@ -233,6 +237,7 @@ backButton.addEventListener('click', () => {
     loadWorldMap();
 });
 
+const todaysDate = getTodaysDate();
 const todaysPuzzle = dailyPuzzle[getTodaysDate()];
 
 confirmButton.addEventListener('click', () => {
@@ -249,6 +254,7 @@ confirmButton.addEventListener('click', () => {
         gameOver = true;
     }
 
+    // these three lines are only here for debugging purposes
     const correct = currentLevel === todaysPuzzle.continent && selectedNode.id === todaysPuzzle.node;
     console.log(`dailyPuzzle.continent: ${todaysPuzzle.continent}, selectedNode.id: ${todaysPuzzle.node}`)
     console.log(`selected ${selectedNode.id}, correct: ${correct}`);
@@ -265,6 +271,13 @@ helpButton.addEventListener('click', () => {
 giveUpButton.addEventListener('click', () => {
     console.log(`give up ` + Date.now());
     // #FEB2B2
+})
+
+shareButton.addEventListener('click', () => {
+    const text = generateShareText();
+    navigator.clipboard.writeText(text); 
+    console.log('copied');
+    shareButton.textContent = 'Copied!';
 })
 
 // returns todays date as a string for finding the correct hint file
@@ -305,6 +318,26 @@ function renderGuesses() {
         box.textContent = `#${index + 1}: ${guess.continent}-${guess.node}`;
         guessStack.appendChild(box);
     });
+}
+
+function generateShareText() {
+    const shareString = guesses.map(guess => {
+        if (guess.result === 'correct') {
+            return '🟩';
+        }
+        if (guess.result === 'partial') {
+            return '🟧';
+        }
+        return '🟥';
+    }).join('');
+
+    const score = guesses[guesses.length - 1].result === 'correct'
+        ? `${guesses.length}/${MAX_GUESSES}`
+        : `X/${MAX_GUESSES}`;
+
+    // console.log(`${getTodaysDate}`);
+    console.log(`MapleGuessr: ${todaysDate}\nhttps:mapleguessr.com\n${score}\n${shareString}`);
+    return `MapleGuessr: ${todaysDate}\nhttps:mapleguessr.com\n${score}\n${shareString}`;
 }
 
 loadWorldMap();
