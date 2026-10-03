@@ -1,5 +1,3 @@
-// const EPOCH = Date.UTC(2026, 10, 6); // currently not used
-
 // track current map state so that old markers don't linger when swapping maps
 let currentOverlay = null;
 let currentMarkers = [];
@@ -48,9 +46,9 @@ function loadMap(imageUrl, bounds) {
 }
 
 const dailyPuzzle = {
-    hintImage: 'hints/2026-10-02.png',
-    correctContinent: 'VI',
-    correctNode: 'VI-1',
+    '2026-10-02': { continent: 'VI', node: 'LH' },
+    '2026-10-03': { continent: 'VI', node: 'H' },
+    '2026-10-04': { continent: 'VI', node: 'E' }
 }
 
 // define continents as an array of objects
@@ -71,9 +69,9 @@ const continents = [
                 // once I finalize the map size and make sure it scales properly 
                 // I'll create a function to convert this automatically
             // radius affects the hitbox size 
-            { id: 'LH', center: [85, 110], radius: 15, correct: true },
-            { id: 'H', center: [82, 300], radius: 15, correct: false },
-            { id: 'E', center: [208, 453], radius: 15, correct: false }
+            { id: 'LH', center: [85, 110], radius: 15 },
+            { id: 'H', center: [82, 300], radius: 15 },
+            { id: 'E', center: [208, 453], radius: 15 }
         ]
     },
     {
@@ -83,7 +81,7 @@ const continents = [
         mapImage: 'msmi.webp',
         mapBounds: [[0, 0], [455, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25, correct: true }
+            { id: 'temp', center: [83, 117], radius: 25 }
         ]
     },
     {
@@ -93,7 +91,7 @@ const continents = [
         // mapImage: 'link',
         // mapBounds: [[0, 0], [455, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25, correct: true }
+            { id: 'temp', center: [83, 117], radius: 25 }
         ]
     },
     {
@@ -103,7 +101,7 @@ const continents = [
         // mapImage: 'link',
         // mapBounds: [[0, 0], [455, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25, correct: true }
+            { id: 'temp', center: [83, 117], radius: 25 }
         ]
     },
     {
@@ -113,7 +111,7 @@ const continents = [
         // mapImage: 'link',
         // mapBounds: [[0, 0], [455, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25, correct: true }
+            { id: 'temp', center: [83, 117], radius: 25 }
         ]
     }
   // ...one polygon per continent
@@ -228,11 +226,20 @@ confirmButton.addEventListener('click', () => {
     if (!selectedNode) {
         return;
     }
-    const correct = selectedNode.correct;
-    console.log(`selected ${selectedNode.id}, correct: ${correct}`);
+    // const correct = selectedNode.correct;
+    console.log(`selected ${selectedNode.id}`);
 });
 
-hintImage.src = dailyPuzzle.hintImage;
+function getTodaysDate() {
+    const now = new Date();
+    const yyyy= now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    console.log(`${yyyy}-${mm}-${dd}`);
+}
+
+hintImage.src = dailyPuzzle.hintImage; // currently producing error in console because of current refactor
 hintImage.alt = 'Hint';
 
 loadWorldMap();
+getTodaysDate();
