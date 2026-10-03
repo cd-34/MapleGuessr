@@ -230,16 +230,17 @@ confirmButton.addEventListener('click', () => {
     console.log(`selected ${selectedNode.id}`);
 });
 
+// returns todays date as a string for finding the correct hint file
 function getTodaysDate() {
     const now = new Date();
     const yyyy= now.getFullYear();
     const mm = String(now.getMonth() + 1).padStart(2, '0');
     const dd = String(now.getDate()).padStart(2, '0');
-    console.log(`${yyyy}-${mm}-${dd}`);
+    // console.log(`${yyyy}-${mm}-${dd}`);
+    return `${yyyy}-${mm}-${dd}`;
 }
 
-hintImage.src = dailyPuzzle.hintImage; // currently producing error in console because of current refactor
+hintImage.src = `hints/${getTodaysDate()}.png`; // currently producing error in console because of current refactor
 hintImage.alt = 'Hint';
 
 loadWorldMap();
-getTodaysDate();
