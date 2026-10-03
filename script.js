@@ -8,6 +8,7 @@ let pendingGuess = null;
 let selectedNode = null;
 let guesses = [];
 let gameOver = false;
+let nodePopupTimeout = null;
 let copyPopupTimeout = null;
 
 
@@ -176,15 +177,30 @@ function addGuessNodeMarkers(continent) {
 
 // allows players to click on nodes 
 function selectNode(node, marker) {
+    // record node object and its id
+    // maybe should rename to be more clear
     selectedNode = node;
     pendingGuess = node.id;
 
     if (gameOver) {
         return;
     }
-    // need to add pop-up name and different highlighting colour
+    
+    // removes previous node selections and selects a new one
     currentMarkers.forEach(m => m.getElement()?.classList.remove('selected-node'));
     marker.getElement()?.classList.add('selected-node');
+
+    // grabs a reference to the specific marker and produces a popup for 2 seconds
+    const popupEl = marker.getElement()?.querySelector('.popuptext');
+    if (popupEl) {
+        popupEl.textContent = node.id;
+        popupEl.classList.add('show');
+
+        clearTimeout(nodePopupTimeout);
+        nodePopupTimeout = setTimeout(() => {
+            popupEl.classList.remove('show');
+        }, 2000);
+    }
 
     updateButtonStates();
 }
@@ -197,6 +213,7 @@ function createNodeIcon(radius, dotSize = 14) {
             <div class="node-hitbox" style="width:${radius * 1.01}px; height:${radius * 1.01}px;">
                 <div class="node-dot" style="width:${dotSize}px; height:${dotSize}px;"></div>
             </div>
+            <span class="popuptext">Node</span>
         `,
         iconSize: [radius * 2, radius * 2],
         iconAnchor: [radius, radius]

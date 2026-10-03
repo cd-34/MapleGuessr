@@ -236,7 +236,7 @@ might need to make smaller */
 }
 
 /* The actual popup bubble */
-.copy-popuptext {
+.popuptext {
     visibility: hidden;
     width: 160px;
     background-color: #333;
@@ -252,7 +252,7 @@ might need to make smaller */
     font-size: 0.85rem;
 }
 
-.copy-popuptext::after {
+.popuptext::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -264,7 +264,7 @@ might need to make smaller */
 }
 
 /* Toggle class that reveals it with a fade */
-.copy-popuptext.show {
+.popuptext.show {
     visibility: visible;
     animation: fadeIn 0.4s;
 }
