@@ -35,7 +35,19 @@ app.get('/api/puzzle/today', (req, res) => {
     res.json({
         date: today,
         hintImage: `/hints/${today}.png`
-        // continent/node is intentionally withheld
+    });
+});
+
+app.get('/api/answer/today', (req, res) => {
+    const today = getTodayString();
+    const puzzle = dailyPuzzles[today];
+
+    if (!puzzle) return res.status(404).json({ error: 'No puzzle today' });
+
+    res.json({
+        continent: puzzle.continent,
+        node: puzzle.node,
+        link: puzzle.link
     });
 });
 

@@ -1,6 +1,7 @@
 import { loadTodaysPuzzle, checkGuess, submitFinalResult, loadStats, fetchAnswer } from './api.js';
 import { currentMarkers, clearMarkers, addContinentMarkers, addGuessNodeMarkers } from './markers.js';
 import { continents } from './continents.js';
+import { showEndGameModal } from './endgame.js';
 
 // track current map state so that old markers don't linger when swapping maps
 let currentOverlay = null;
@@ -144,7 +145,9 @@ confirmButton.addEventListener('click', async () => {
 
     if (result === 'correct' || guesses.length >= MAX_GUESSES) {
         gameOver = true;
-        await submitFinalResult(result === 'correct' ? guesses.length : 0);
+        const won = result === 'correct';
+        await submitFinalResult(won ? guesses.length : 0);
+        await showEndGameModal(won, guesses.length, hintImage.src, generateShareText, showCopyPopup);
     }
 
     pendingGuess = null;
@@ -237,14 +240,19 @@ function generateShareText() {
 // });
 
 async function init() {
-    todaysPuzzleMeta = await loadTodaysPuzzle();
+    try {
+        todaysPuzzleMeta = await loadTodaysPuzzle();
 
-    if (todaysPuzzleMeta.error) {
-        console.error('No puzzle available today. Message me on Reddit!');
-        hintImage.alt = 'No puzzle available today. Message me on Reddit!';
-    } else {
-        hintImage.src = todaysPuzzleMeta.hintImage;
+        if (todaysPuzzleMeta.error) {
+            console.error('No puzzle available today.');
+            hintImage.alt = 'No puzzle available today.';
+        } else {
+            hintImage.src = todaysPuzzleMeta.hintImage;
+        }
+    } catch (err) {
+        console.error('Failed to load today\'s puzzle:', err);
     }
+
     loadWorldMap();
 }
 
