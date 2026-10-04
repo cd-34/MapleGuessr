@@ -34,7 +34,7 @@ app.get('/api/puzzle/today', (req, res) => {
 
     res.json({
         date: today,
-        hintImage: `/hints/${today}.webp`
+        hintImage: `/hints/${today}.png`
         // continent/node is intentionally withheld
     });
 });

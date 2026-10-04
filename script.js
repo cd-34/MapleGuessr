@@ -57,12 +57,6 @@ function loadMap(imageUrl, bounds) {
     map.fitBounds(bounds);
 }
 
-const dailyPuzzle = {
-    '2026-10-04': { continent: 'VI', node: 'LH' },
-    '2026-10-05': { continent: 'VI', node: 'H' },
-    '2026-10-06': { continent: 'VI', node: 'E' }
-}
-
 // define continents as an array of objects
 const continents = [
     {
@@ -261,7 +255,7 @@ backButton.addEventListener('click', () => {
 });
 
 const todaysDate = getTodaysDate();
-const todaysPuzzle = dailyPuzzle[getTodaysDate()];
+
 
 confirmButton.addEventListener('click', async () => {
     if (!selectedNode) {
@@ -272,12 +266,7 @@ confirmButton.addEventListener('click', async () => {
         return;
     }
 
-    const res = await fetch('http://localhost:3000/api/guess', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ continent: currentLevel, node: selectedNode.id })
-    });
-    const { result } = await res.json();
+    const result = await checkGuess(currentLevel, selectedNode.id);
 
     guesses.push({ continent: currentLevel, node: selectedNode.id, result });
     renderGuesses();
@@ -286,10 +275,6 @@ confirmButton.addEventListener('click', async () => {
         gameOver = true;
         await submitFinalResult(result === 'correct' ? guesses.length : 0);
     }
-    // these three lines are only here for debugging purposes
-    const correct = currentLevel === todaysPuzzle.continent && selectedNode.id === todaysPuzzle.node;
-    console.log(`dailyPuzzle.continent: ${todaysPuzzle.continent}, selectedNode.id: ${todaysPuzzle.node}`)
-    console.log(`selected ${selectedNode.id}, correct: ${correct}`);
 
     pendingGuess = null;
     selectedNode = null;
@@ -338,20 +323,14 @@ function getTodaysDate() {
 hintImage.src = `hints/${getTodaysDate()}.png`; // currently producing error in console because of current refactor
 hintImage.alt = 'Hint';
 
-// used for colour coding and for the confirmButton to check if game is over
-function recordGuess(continent, node) {
-    let result;
-    if (continent === todaysPuzzle.continent && node === todaysPuzzle.node) {
-        result = 'correct';
-    } else if (continent === todaysPuzzle.continent) {
-        result = 'partial';
-    } else {
-        result = 'wrong';
-    }
-
-    guesses.push({ continent, node, result });
-    renderGuesses();
-    return result;
+async function checkGuess(continent, node) {
+    const res = await fetch('http://localhost:3000/api/guess', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ continent, node })
+    });
+    const data = await res.json();
+    return data.result; // 'correct' | 'partial' | 'wrong'
 }
 
 // adds guesses to the stack
@@ -388,6 +367,13 @@ function generateShareText() {
 async function loadTodaysPuzzle() {
     const res = await fetch('http://localhost:3000/api/puzzle/today');
     todaysPuzzleAnswer = await res.json();
+
+    if (todaysPuzzleAnswer.error) {
+        console.error('No puzzle available today. Message me on Reddit!')
+        hintImage.alt = 'No puzzle available today. Message me on Reddit!'
+        return
+    }
+
     hintImage.src = todaysPuzzleAnswer.hintImage;
 }
 
@@ -406,11 +392,9 @@ async function loadStats() {
     // next step: feed this into chart_display or your own bar rendering
 }
 
-fetch('http://localhost:3000/api/puzzle/today')
-    .then(res => res.json())
-    .then(data => console.log('puzzle data:', data))
-    .catch(err => console.error('fetch failed:', err));
+async function init() {
+    await loadTodaysPuzzle();
+    loadWorldMap();
+}
 
-
-
-loadWorldMap();
+init();
