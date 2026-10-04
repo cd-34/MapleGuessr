@@ -1,8 +1,8 @@
 import { loadTodaysPuzzle, checkGuess, submitFinalResult, loadStats, fetchAnswer } from './api.js';
+import { currentMarkers, clearMarkers, addContinentMarkers, addGuessNodeMarkers } from './markers.js';
 
 // track current map state so that old markers don't linger when swapping maps
 let currentOverlay = null;
-let currentMarkers = [];
 // track map state to see if we're in the world map or not
 let currentLevel = 'world';
 // pendingGuess and selectedNode used for confirm button
@@ -39,11 +39,6 @@ const map = L.map('map', {
     doubleClickZoom: false, 
     attributionControl: false
 });
-
-function clearMarkers() {
-    currentMarkers.forEach(m => map.removeLayer(m));
-    currentMarkers = [];
-}
 
 // load a given map with a url
 function loadMap(imageUrl, bounds) {
@@ -125,53 +120,8 @@ const continents = [
   // ...one polygon per continent
 ];
 
-// reusable divIcon function for islands with different radii
-// returns a Leaflet icon object that you can attach to a marker
-function createContinentIcon(radius) {
-    return L.divIcon({
-        className: 'continent-marker',
-        html: `<div class="continent-hitbox" style="width:${radius*2}px; height:${radius*2}px;"></div>`,
-        iconSize: [radius * 2, radius * 2],
-        iconAnchor: [radius, radius] // center the icon on the coordinate
-    });
-}
-
-// iterates over the continents array to create a marker using that continent's radius
-// addTo(map) places the marker onto the Leaflet map
-function addContinentMarkers() {
-    continents.forEach(continent => {
-        const marker = L.marker(continent.center, {
-            icon: createContinentIcon(continent.radius),
-            // riseOnHover: true    
-        }).addTo(map);
-
-        // attaches a click handler for each marker
-        marker.on('click', () => {
-            loadContinentMap(continent);
-            // clearMarkers(); // removes world-map continent markers
-        });
-
-        currentMarkers.push(marker);
-    });
-}
-
-// iterates through the list of nodes for the selected continent
-// and adds markers based on their center
-function addGuessNodeMarkers(continent) {
-    continent.nodes.forEach(node => {
-        const marker = L.marker(node.center, {
-            icon: createNodeIcon(node.radius, node.type) 
-        }).addTo(map);
-
-        marker.on('click', () => {
-            selectNode(node, marker);
-        })
-
-        currentMarkers.push(marker);
-    })
-}
-
 // allows players to click on nodes 
+// main orchestrator for the game
 function selectNode(node, marker) {
     // record node object and its id
     // maybe should rename to be more clear
@@ -205,27 +155,10 @@ function selectNode(node, marker) {
     updateButtonStates();
 }
 
-function createNodeIcon(radius, type = 'regular', dotSize = 14) {
-    return L.divIcon({
-        className: 'node-marker',
-        // border for each node
-        html: `
-            <div class="copy-popup-wrapper">
-                <div class="node-hitbox node-${type}" style="width:${radius * 1.01}px; height:${radius * 1.01}px;">
-                    <div class="node-dot" style="width:${dotSize}px; height:${dotSize}px;"></div>
-                </div>
-                <span class="popuptext"></span>
-            </div>
-        `,
-        iconSize: [radius * 2, radius * 2],
-        iconAnchor: [radius, radius]
-    })
-}
-
 function loadWorldMap() {
     loadMap('msmw-resized.png', worldBounds);
-    clearMarkers();
-    addContinentMarkers();
+    clearMarkers(map);
+    addContinentMarkers(map, continents, loadContinentMap);
     currentLevel = 'world';
     pendingGuess = null;
     updateButtonStates();
@@ -233,14 +166,13 @@ function loadWorldMap() {
 
 function loadContinentMap(continent) {
     loadMap(continent.mapImage, continent.mapBounds);
-    clearMarkers();
+    clearMarkers(map);
     // console.log('clearmarkers should work here');
     currentLevel = continent.name;
     // console.log('clicked on: ', continent.name);
-    currentLevel = continent.name;
     pendingGuess = null;
     selectedNode = null;
-    addGuessNodeMarkers(continent);
+    addGuessNodeMarkers(map, continent, selectNode);
     updateButtonStates();
 }
 
