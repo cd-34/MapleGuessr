@@ -212,7 +212,7 @@ function createNodeIcon(radius, type = 'regular', dotSize = 14) {
                 <div class="node-hitbox node-${type}" style="width:${radius * 1.01}px; height:${radius * 1.01}px;">
                     <div class="node-dot" style="width:${dotSize}px; height:${dotSize}px;"></div>
                 </div>
-                <span class="copy-popuptext"></span>
+                <span class="popuptext"></span>
             </div>
         `,
         iconSize: [radius * 2, radius * 2],
