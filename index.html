@@ -51,6 +51,21 @@
             How To Play MapleGuessr
         </div>
     </dialog>
+
+    <div id="endgame-overlay">
+        <div id="endgame-modal">
+            <!-- will be populated different depending on win vs loss -->
+            <h2 id="endgame-heading"></h2> 
+            <h3 id="endgame-node-heading"></h3>
+            <h3 id="endgame-node-link" href="#" target="_blank" rel="noopener">View on NiaMeowDB</h3>
+
+            <img id="endgame-hint-image" src="" alt="Hint enlarged">
+            <div id="endgame-chart"></div>
+            
+            <button id="endgame-share-button">Share Results</button>
+            <button id="endgame-close-button">Close</button>
+        </div>
+    </div>
     <script>
         // shows dialog permanently for debugging purposes
         // document.querySelector('.dialog').showModal()
