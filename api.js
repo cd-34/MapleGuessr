@@ -1,7 +1,7 @@
 // no dependency on leaflet or game state 
 // server logic now separated
 
-const API_BASE = 'http://localhost:3000';
+const API_BASE = '';
 
 export async function loadTodaysPuzzle() {
     const res = await fetch(`${API_BASE}/api/puzzle/today`);

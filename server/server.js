@@ -1,4 +1,5 @@
-// server/server.js
+app.use(express.static(path.join(__dirname, '../'))); 
+
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
