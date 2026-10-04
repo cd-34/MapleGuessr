@@ -279,3 +279,94 @@ might need to make smaller */
     from { opacity: 0; }
     to   { opacity: 1; }
 }
+
+#endgame-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+#endgame-overlay.show {
+    display: flex;
+}
+
+#endgame-modal {
+    background: var(--primary-colour);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 24px;
+    width: 90%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: white;
+    text-align: center;
+}
+
+#endgame-heading {
+    margin: 0 0 8px;
+}
+
+#endgame-node-heading {
+    margin: 0 0 4px;
+    color: var(--node-color);
+}
+
+#endgame-node-link {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #7cc1ff;
+    font-size: 0.9rem;
+}
+
+#endgame-hint-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+#endgame-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 8px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.chart-bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 36px;
+}
+
+.chart-bar {
+    width: 100%;
+    background: var(--node-color);
+    border-radius: 3px 3px 0 0;
+    transition: height 0.4s ease;
+}
+
+.chart-bar.user-bar {
+    background: #4caf50; /* highlight the player's own result */
+}
+
+.chart-bar-label {
+    font-size: 0.75rem;
+    margin-top: 4px;
+}
+
+.chart-bar-pct {
+    font-size: 0.7rem;
+    margin-bottom: 2px;
+}
+
+#endgame-modal button {
+    margin: 4px;
+}

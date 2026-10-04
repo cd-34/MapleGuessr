@@ -1,3 +1,5 @@
+import { loadTodaysPuzzle, checkGuess, submitFinalResult, loadStats, fetchAnswer } from './api.js';
+
 // track current map state so that old markers don't linger when swapping maps
 let currentOverlay = null;
 let currentMarkers = [];
@@ -10,7 +12,7 @@ let guesses = [];
 let gameOver = false;
 let nodePopupTimeout = null;
 let copyPopupTimeout = null;
-let todaysPuzzleAnswer = null; // no answer
+let todaysPuzzleMeta = null; // no answer
 
 const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
@@ -320,19 +322,6 @@ function getTodaysDate() {
     return `${yyyy}-${mm}-${dd}`;
 }
 
-hintImage.src = `hints/${getTodaysDate()}.png`; // currently producing error in console because of current refactor
-hintImage.alt = 'Hint';
-
-async function checkGuess(continent, node) {
-    const res = await fetch('http://localhost:3000/api/guess', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ continent, node })
-    });
-    const data = await res.json();
-    return data.result; // 'correct' | 'partial' | 'wrong'
-}
-
 // adds guesses to the stack
 function renderGuesses() {
     guessStack.innerHTML = '';
@@ -364,36 +353,29 @@ function generateShareText() {
     return `MapleGuessr: ${todaysDate}\nhttps:mapleguessr.com\n${score}\n${shareString}`;
 }
 
-async function loadTodaysPuzzle() {
-    const res = await fetch('http://localhost:3000/api/puzzle/today');
-    todaysPuzzleAnswer = await res.json();
+// new endpoint that reveals the full answer
+// app.get('/api/answer/today', (req, res) => {
+//     const today = getTodayString();
+//     const puzzle = dailyPuzzles[today];
 
-    if (todaysPuzzleAnswer.error) {
-        console.error('No puzzle available today. Message me on Reddit!')
-        hintImage.alt = 'No puzzle available today. Message me on Reddit!'
-        return
-    }
+//     if (!puzzle) return res.status(404).json({ error: 'No puzzle today' });
 
-    hintImage.src = todaysPuzzleAnswer.hintImage;
-}
-
-async function submitFinalResult(tries) {
-    await fetch('http://localhost:3000/api/results', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tries })
-    });
-}
-
-async function loadStats() {
-    const res = await fetch('http://localhost:3000/api/stats/today');
-    const stats = await res.json();
-    console.log('Guess distribution:', stats); // e.g. { "1": 4, "2": 12, "3": 8, "0": 2 }
-    // next step: feed this into chart_display or your own bar rendering
-}
+//     res.json({
+//         continent: puzzle.continent,
+//         node: puzzle.node,
+//         link: puzzle.link
+//     });
+// });
 
 async function init() {
-    await loadTodaysPuzzle();
+    todaysPuzzleMeta = await loadTodaysPuzzle();
+
+    if (todaysPuzzleMeta.error) {
+        console.error('No puzzle available today. Message me on Reddit!');
+        hintImage.alt = 'No puzzle available today. Message me on Reddit!';
+    } else {
+        hintImage.src = todaysPuzzleMeta.hintImage;
+    }
     loadWorldMap();
 }
 
