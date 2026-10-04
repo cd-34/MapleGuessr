@@ -10,7 +10,7 @@ let guesses = [];
 let gameOver = false;
 let nodePopupTimeout = null;
 let copyPopupTimeout = null;
-
+let todaysPuzzleAnswer = null; // no answer
 
 const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
@@ -58,9 +58,9 @@ function loadMap(imageUrl, bounds) {
 }
 
 const dailyPuzzle = {
-    '2026-10-02': { continent: 'VI', node: 'LH' },
-    '2026-10-03': { continent: 'VI', node: 'H' },
-    '2026-10-04': { continent: 'VI', node: 'E' }
+    '2026-10-04': { continent: 'VI', node: 'LH' },
+    '2026-10-05': { continent: 'VI', node: 'H' },
+    '2026-10-06': { continent: 'VI', node: 'E' }
 }
 
 // define continents as an array of objects
@@ -263,7 +263,7 @@ backButton.addEventListener('click', () => {
 const todaysDate = getTodaysDate();
 const todaysPuzzle = dailyPuzzle[getTodaysDate()];
 
-confirmButton.addEventListener('click', () => {
+confirmButton.addEventListener('click', async () => {
     if (!selectedNode) {
         return;
     }
@@ -272,11 +272,20 @@ confirmButton.addEventListener('click', () => {
         return;
     }
 
-    const result = recordGuess(currentLevel, selectedNode.id);
+    const res = await fetch('http://localhost:3000/api/guess', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ continent: currentLevel, node: selectedNode.id })
+    });
+    const { result } = await res.json();
+
+    guesses.push({ continent: currentLevel, node: selectedNode.id, result });
+    renderGuesses();
+
     if (result === 'correct' || guesses.length >= MAX_GUESSES) {
         gameOver = true;
+        await submitFinalResult(result === 'correct' ? guesses.length : 0);
     }
-
     // these three lines are only here for debugging purposes
     const correct = currentLevel === todaysPuzzle.continent && selectedNode.id === todaysPuzzle.node;
     console.log(`dailyPuzzle.continent: ${todaysPuzzle.continent}, selectedNode.id: ${todaysPuzzle.node}`)
@@ -375,5 +384,33 @@ function generateShareText() {
     console.log(`MapleGuessr: ${todaysDate}\nhttps:mapleguessr.com\n${score}\n${shareString}`);
     return `MapleGuessr: ${todaysDate}\nhttps:mapleguessr.com\n${score}\n${shareString}`;
 }
+
+async function loadTodaysPuzzle() {
+    const res = await fetch('http://localhost:3000/api/puzzle/today');
+    todaysPuzzleAnswer = await res.json();
+    hintImage.src = todaysPuzzleAnswer.hintImage;
+}
+
+async function submitFinalResult(tries) {
+    await fetch('http://localhost:3000/api/results', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tries })
+    });
+}
+
+async function loadStats() {
+    const res = await fetch('http://localhost:3000/api/stats/today');
+    const stats = await res.json();
+    console.log('Guess distribution:', stats); // e.g. { "1": 4, "2": 12, "3": 8, "0": 2 }
+    // next step: feed this into chart_display or your own bar rendering
+}
+
+fetch('http://localhost:3000/api/puzzle/today')
+    .then(res => res.json())
+    .then(data => console.log('puzzle data:', data))
+    .catch(err => console.error('fetch failed:', err));
+
+
 
 loadWorldMap();
