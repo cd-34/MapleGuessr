@@ -22,7 +22,7 @@ export const continents = [
             { id: 'L Forest I', center: [215, 126], radius: 15, type: 'regular' },
             { id: 'Kerning City Construction Site', center: [243, 128], radius: 15, type: 'regular' },
 
-            { id: 'Kerning City', center: [107, 274], radius: 15, type: 'town' },
+            { id: 'Kerning City', center: [274, 105], radius: 15, type: 'town' },
             
             { id: 'The Swamp of Despair I', center: [274, 152], radius: 15, type: 'regular' },
             { id: 'The Swamp of Despair II', center: [267, 182], radius: 15, type: 'regular' },
@@ -83,7 +83,18 @@ export const continents = [
         mapImage: 'maps/msmi.webp',
         mapBounds: [[0, 0], [470, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
+            { id: 'Mushroom Town - West Entrance', center: [309, 150], radius: 15, type: 'regular' },
+            { id: 'Mushroom Town', center: [318, 203], radius: 15, type: 'regular' },
+            { id: 'East Entrance to Mushroom Town', center: [282, 212], radius: 15, type: 'regular' },
+            { id: 'Snail Hunting Ground I', center: [240, 236], radius: 15, type: 'regular' },
+            { id: 'Snail Hunting Ground II', center: [230, 281], radius: 15, type: 'regular' },
+            { id: 'Snail Hunting Ground III', center: [223, 319], radius: 15, type: 'regular' },
+            { id: 'A Split Road', center: [205, 360], radius: 15, type: 'regular' },
+            { id: 'The Field West of Amherst', center: [220, 397], radius: 15, type: 'regular' },
+            { id: 'The Field East of Amherst', center: [190, 488], radius: 15, type: 'regular' },
+
+            { id: 'Amherst', center: [232, 464], radius: 15, type: 'town' },
+            { id: 'Southperry', center: [160, 391], radius: 15, type: 'town' }
         ]
     },
     {
