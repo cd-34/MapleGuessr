@@ -79,11 +79,11 @@ function selectNode(node, marker) {
     marker.getElement()?.classList.add('selected-node');
 
     currentMarkers.forEach(m => {
-        m.getElement()?.querySelector('.popuptext')?.classList.remove('show');
+        m.getElement()?.querySelector('.node-popuptext')?.classList.remove('show');
     });
 
     // grabs a reference to the specific marker and produces a popup for 2 seconds
-    const popupEl = marker.getElement()?.querySelector('.popuptext');
+    const popupEl = marker.getElement()?.querySelector('.node-popuptext');
     if (popupEl) {
         popupEl.textContent = node.id;
         popupEl.classList.add('show');

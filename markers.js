@@ -21,11 +21,11 @@ export function createNodeIcon(radius, type = 'regular', dotSize = 14) {
         className: 'node-marker',
         // border for each node
         html: `
-            <div class="copy-popup-wrapper">
+            <div class="node-popup-wrapper">
                 <div class="node-hitbox node-${type}" style="width:${radius * 1.01}px; height:${radius * 1.01}px;">
                     <div class="node-dot" style="width:${dotSize}px; height:${dotSize}px;"></div>
                 </div>
-                <span class="popuptext"></span>
+                <span class="node-popuptext"></span>
             </div>
         `,
         iconSize: [radius * 2, radius * 2],
