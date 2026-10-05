@@ -1,4 +1,4 @@
-import { loadTodaysPuzzle, checkGuess, submitFinalResult, loadStats, fetchAnswer } from './api.js';
+import { loadTodaysPuzzle, checkGuess, submitFinalResult } from './api.js';
 import { currentMarkers, clearMarkers, addContinentMarkers, addGuessNodeMarkers } from './markers.js';
 import { continents } from './continents.js';
 import { showEndGameModal, openStatsView } from './endgame.js';
