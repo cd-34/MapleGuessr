@@ -184,7 +184,7 @@ function renderGuesses() {
     guesses.forEach((guess, index) => {
         const box = document.createElement('div');
         box.className = `guess-box ${guess.result}`;
-        box.textContent = `#${index + 1}: ${guess.continent}-${guess.node}`;
+        box.innerHTML = `#${index + 1}: ${guess.continent}: <wbr>${guess.node}`;
         guessStack.appendChild(box);
     });
 }
