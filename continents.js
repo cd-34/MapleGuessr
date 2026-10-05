@@ -68,6 +68,8 @@ export const continents = [
             { id: 'A Hill West of Henesys', center: [105, 220], radius: 15, type: 'regular' },
             { id: 'Forest West of Henesys', center: [139, 205], radius: 15, type: 'regular' },
             
+            { id: 'Sleepywood', center: [200, 280], radius: 15, type: 'town' },
+
             { id: 'Florina Beach', center: [88, 536], radius: 15, type: 'town' },
             
             { id: 'A Look-Out Shed Around the Beach', center: [95, 560], radius: 15, type: 'regular' },
