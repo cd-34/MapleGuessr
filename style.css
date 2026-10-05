@@ -78,6 +78,7 @@ button:active {
     max-width: 100%;
     aspect-ratio: 640 / 470;
     height: auto;
+    cursor: url('cursor/point.cur') 0 0, auto;
 }
 
 #guesses {
