@@ -148,7 +148,45 @@ export const continents = [
         mapImage: 'maps/el-nath-mts.webp',
         mapBounds: [[0, 0], [470, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
+            { id: 'Orbis', center: [364, 130], radius: 15, type: 'town' },
+            { id: 'Cloud Park I', center: [363, 243], radius: 15, type: 'regular' },
+            { id: 'Cloud Park II', center: [310, 267], radius: 15, type: 'regular' },
+            { id: 'Strolling Path', center: [264, 278], radius: 15, type: 'regular' },
+            { id: 'Cloud Park III', center: [238, 330], radius: 15, type: 'regular' },
+            { id: 'Cloud Park IV', center: [234, 388], radius: 15, type: 'regular' },
+            { id: 'Strolling Path II', center: [230, 444], radius: 15, type: 'regular' },
+            { id: 'Cloud Park V', center: [242, 492], radius: 15, type: 'regular' },
+            { id: 'Cloud Park VI', center: [260, 539], radius: 15, type: 'regular' },
+            { id: 'The Road to Garden of 3 Colors', center: [352, 331], radius: 15, type: 'regular' },
+            { id: 'Garden of Red I', center: [393, 382], radius: 15, type: 'regular' },
+            { id: 'Garden of Red II', center: [396, 445], radius: 15, type: 'regular' },
+            { id: 'Garden of Yellow I', center: [351, 393], radius: 15, type: 'regular' },
+            { id: 'Garden of Yellow II', center: [351, 434], radius: 15, type: 'regular' },
+            { id: 'Garden of Green I', center: [311, 379], radius: 15, type: 'regular' },
+            { id: 'Garden of Green II', center: [309, 450], radius: 15, type: 'regular' },
+            { id: 'Stairway to the Sky I', center: [355, 493], radius: 15, type: 'regular' },
+            { id: 'Stairway to the Sky II', center: [354, 562], radius: 15, type: 'regular' },
+            { id: 'Garden of Darkness I', center: [397, 585], radius: 15, type: 'regular' },
+            { id: 'Garden of Darkness II', center: [306, 582], radius: 15, type: 'regular' },
+
+            { id: 'Entrance to Orbis Tower', center: [300, 143], radius: 15, type: 'regular' },
+            { id: 'Orbis Tower 20th Floor', center: [237, 142], radius: 15, type: 'regular' },
+            { id: 'Orbis Tower 8th Floor', center: [173, 144], radius: 15, type: 'regular' },
+            { id: 'Orbis Tower B1', center: [105, 141], radius: 15, type: 'regular' },
+            { id: 'Orbis Tower B2', center: [65, 141], radius: 15, type: 'regular' },
+
+            { id: 'Snowy Hill', center: [126, 168], radius: 15, type: 'regular' },
+
+            { id: 'El Nath', center: [106, 242], radius: 15, type: 'town' },
+            { id: 'El Nath Market', center: [117, 260], radius: 15, type: 'town' },
+            { id: 'Watch Out for Icy Path I', center: [73, 295], radius: 15, type: 'regular' },
+            { id: 'Watch Out for Icy Path II', center: [45, 323], radius: 15, type: 'regular' },
+            { id: 'Cold Field I', center: [48, 384], radius: 15, type: 'regular' },
+            { id: 'Cold Field II', center: [106, 387], radius: 15, type: 'regular' },
+            { id: 'Icy Cold Field', center: [110, 365], radius: 15, type: 'regular' },
+            { id: 'Ice Valley I', center: [117, 454], radius: 15, type: 'regular' },
+            { id: 'Ice Valley II', center: [115, 517], radius: 15, type: 'regular' },
+            { id: 'Dead Mines', center: [129, 574], radius: 15, type: 'town' }
         ]
     },
     {
