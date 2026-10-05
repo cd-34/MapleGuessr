@@ -196,7 +196,7 @@ export const continents = [
         mapImage: 'maps/mu-lung-garden.webp',
         mapBounds: [[0, 0], [470, 640]],
         nodes: [
-            { id: 'Mu Lung', center: [324, 468], radius: 15, type: 'town' },
+            { id: 'Mu Lung', center: [325, 466], radius: 15, type: 'town' },
             { id: 'Mu Lung Temple', center: [324, 490], radius: 15, type: 'town' },
             { id: 'Practice Field: Beginner', center: [314, 541], radius: 15, type: 'regular' },
             { id: 'Practice Field: Easy Level', center: [285, 541], radius: 15, type: 'regular' },
@@ -229,8 +229,8 @@ export const continents = [
             { id: '100-Year Old Herb Garden', center: [90, 346], radius: 15, type: 'regular' },
             { id: '50-Year Old Herb Garden', center: [114, 433], radius: 15, type: 'regular' },
             { id: '10-Year Old Herb Garden', center: [93, 468], radius: 15, type: 'regular' },
-            { id: 'Herb Town', center: [100, 508], radius: 15, type: 'regular' },
-            { id: 'Pier on the Beach', center: [138, 541], radius: 15, type: 'regular' }
+            { id: 'Herb Town', center: [100, 508], radius: 15, type: 'town' },
+            { id: 'Pier on the Beach', center: [138, 541], radius: 15, type: 'town' }
         ]
     },
     {
