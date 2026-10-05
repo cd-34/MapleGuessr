@@ -1,4 +1,4 @@
-import { loadTodaysPuzzle, checkGuess, submitFinalResult } from './api.js';
+import { loadTodaysPuzzle, checkGuess, submitFinalResult, loadStats, fetchAnswer } from './api.js';
 import { currentMarkers, clearMarkers, addContinentMarkers, addGuessNodeMarkers } from './markers.js';
 import { continents } from './continents.js';
 import { showEndGameModal, openStatsView } from './endgame.js';
@@ -22,6 +22,9 @@ const helpButton = document.getElementById('help-button');
 const giveUpButton = document.getElementById('give-up-button');
 const shareButton = document.getElementById('share-button');
 const copyPopup = document.getElementById('copy-popup');
+const giveUpOverlay = document.getElementById('giveup-overlay');
+const giveUpYesButton = document.getElementById('giveup-yes-button');
+const giveUpNoButton = document.getElementById('giveup-no-button');
 const worldBounds = [[0, 0], [470, 640]]; // map pixel size - might need to change if swapping to HD map
 const hintImage = document.getElementById('hint-image');
 const MAX_GUESSES = 5;
@@ -160,9 +163,24 @@ helpButton.addEventListener('click', () => {
 })
 
 giveUpButton.addEventListener('click', () => {
-    console.log(`give up ` + Date.now());
     // #FEB2B2
-})
+    if (gameOver) return; // nothing to give up on if the game's already over
+    giveUpOverlay.classList.add('show');
+});
+
+giveUpNoButton.addEventListener('click', () => {
+    giveUpOverlay.classList.remove('show');
+});
+
+giveUpYesButton.addEventListener('click', async () => {
+    giveUpOverlay.classList.remove('show');
+
+    gameOver = true;
+    await submitFinalResult(0); // 0 = counts as a fail, same as running out of guesses
+    await showEndGameModal(false, guesses.length, hintImage.src, generateShareText);
+
+    updateButtonStates();
+});
 
 shareButton.addEventListener('click', () => {
     openStatsView();
@@ -184,7 +202,7 @@ function renderGuesses() {
     guesses.forEach((guess, index) => {
         const box = document.createElement('div');
         box.className = `guess-box ${guess.result}`;
-        box.innerHTML = `#${index + 1}: ${guess.continent}: <wbr>${guess.node}`;
+        box.innerHTML = `#${index + 1}: ${guess.continent}:<wbr>${guess.node}`;
         guessStack.appendChild(box);
     });
 }

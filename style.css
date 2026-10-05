@@ -237,6 +237,49 @@ might need to make smaller */
     display: block;
 }
 
+#help-button {
+    margin-top: 10px;
+}
+
+#giveup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2500; /* higher than endgame-overlay's 2000, in case both could ever stack */
+    align-items: center;
+    justify-content: center;
+}
+
+#giveup-overlay.show {
+    display: flex;
+}
+
+#giveup-modal {
+    background: var(--primary-colour);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 24px;
+    width: 90%;
+    max-width: 320px;
+    color: white;
+    text-align: center;
+}
+
+#giveup-image {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 6px;
+    margin: 12px 0;
+}
+
+#giveup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
 #share-button {
     visibility: hidden;
 }
