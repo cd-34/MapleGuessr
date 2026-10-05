@@ -220,12 +220,13 @@ function generateShareText() {
         return '🟥';
     }).join('');
 
-    const score = guesses[guesses.length - 1].result === 'correct'
+    const lastGuess = guesses[guesses.length - 1];
+    const score = (lastGuess && lastGuess.result === 'correct')
         ? `${guesses.length}/${MAX_GUESSES}`
         : `X/${MAX_GUESSES}`;
 
     // console.log(`${getTodaysDate}`);
-    console.log(`MapleGuessr: ${todaysDate}\nhttps://mapleguessr.com\n${score}\n${shareString}`);
+    // console.log(`MapleGuessr: ${todaysDate}\nhttps://mapleguessr.com\n${score}\n${shareString}`);
     return `MapleGuessr: ${todaysDate}\nhttps://mapleguessr.com\n${score}\n${shareString}`;
 }
 
