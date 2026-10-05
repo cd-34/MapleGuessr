@@ -1,5 +1,3 @@
-app.use(express.static(path.join(__dirname, '../'))); 
-
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
@@ -8,6 +6,7 @@ const path = require('path');
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../'))); 
 
 const dailyPuzzles = require('./dailyPuzzles.json'); // server-only, never served directly
 const RESULTS_FILE = path.join(__dirname, 'results.json');
