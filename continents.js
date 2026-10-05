@@ -1,10 +1,10 @@
 // define continents as an array of objects
 export const continents = [
     {
-        name: 'VI',
-        center: [315, 80],
+        name: 'Victoria Island',
+        center: [325, 80],
         radius: 65,
-        mapImage: 'msvi.webp',
+        mapImage: 'maps/victoria-island.webp',
         mapBounds: [[0, 0], [470, 640]],
         nodes: [
             // center [vertical bottom up, horizontal left to right]
@@ -22,41 +22,71 @@ export const continents = [
         ]
     },
     {
-        name: 'MI',
-        center:[393, 139],
+        name: 'Maple Island',
+        center:[402, 140],
         radius: 24,
-        mapImage: 'msmi.webp',
-        mapBounds: [[0, 0], [455, 640]],
+        mapImage: 'maps/msmi.webp',
+        mapBounds: [[0, 0], [470, 640]],
         nodes: [
             { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
         ]
     },
     {
-        name: 'AR',
+        name: 'Aqua Road',
         center:[283, 195],
         radius: 45,
-        // mapImage: 'link',
-        // mapBounds: [[0, 0], [455, 640]],
+        mapImage: 'maps/aqua-road.webp',
+        mapBounds: [[0, 0], [470, 640]],
         nodes: [
             { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
         ]
     },
     {
-        name: 'LL',
+        name: 'Ludus Lake',
         center:[200, 265],
         radius: 58,
-        // mapImage: 'link',
-        // mapBounds: [[0, 0], [455, 640]],
+        mapImage: 'maps/ludus-lake.webp',
+        mapBounds: [[0, 0], [470, 640]],
         nodes: [
             { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
         ]
     },
     {
-        name: 'EM',
+        name: 'El Nath Mts',
         center:[270, 380],
         radius: 80,
-        // mapImage: 'link',
-        // mapBounds: [[0, 0], [455, 640]],
+        mapImage: 'maps/el-nath-mts.webp',
+        mapBounds: [[0, 0], [470, 640]],
+        nodes: [
+            { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
+        ]
+    },
+    {
+        name: 'Mu Lung Garden',
+        center:[150, 550],
+        radius: 75,
+        mapImage: 'maps/mu-lung-garden.webp',
+        mapBounds: [[0, 0], [470, 640]],
+        nodes: [
+            { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
+        ]
+    },
+    {
+        name: 'Nihal Desert',
+        center:[75, 390],
+        radius: 70,
+        mapImage: 'maps/nihal-desert.webp',
+        mapBounds: [[0, 0], [470, 640]],
+        nodes: [
+            { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
+        ]
+    },
+    {
+        name: 'Minar Forest',
+        center:[75, 200],
+        radius: 70,
+        mapImage: 'maps/minar-forest.webp',
+        mapBounds: [[0, 0], [470, 640]],
         nodes: [
             { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
         ]

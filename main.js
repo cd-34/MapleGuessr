@@ -98,7 +98,7 @@ function selectNode(node, marker) {
 }
 
 function loadWorldMap() {
-    loadMap('msmw-resized.png', worldBounds);
+    loadMap('maps/msmw-resized.png', worldBounds);
     clearMarkers(map);
     addContinentMarkers(map, continents, loadContinentMap);
     currentLevel = 'world';
