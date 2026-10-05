@@ -65,7 +65,7 @@ function renderEndGameChart(stats, userResult) {
 }
 
 
-function showCopyPopup(message = 'Copied to clipboard!') {
+function showCopyPopup(message = 'Copied!') {
     copyPopup.textContent = message;
     copyPopup.classList.add('show');
 

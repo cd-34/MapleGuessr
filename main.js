@@ -164,16 +164,6 @@ giveUpButton.addEventListener('click', () => {
     // #FEB2B2
 })
 
-function showCopyPopup(message = 'Copied to clipboard!') {
-    copyPopup.textContent = message;
-    copyPopup.classList.add('show');
-
-    clearTimeout(copyPopupTimeout);
-    copyPopupTimeout = setTimeout(() => {
-        copyPopup.classList.remove('show');
-    }, 2000);
-}
-
 shareButton.addEventListener('click', () => {
     openStatsView();
 });
