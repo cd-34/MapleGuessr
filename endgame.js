@@ -20,7 +20,7 @@ export async function showEndGameModal(won, tries, hintImageSrc, generateShareTe
         : 'Better luck next time';
 
     const answer = await fetchAnswer();
-    endgameNodeHeading.textContent = `${answer.continent}-${answer.node}`;
+    endgameNodeHeading.textContent = `${answer.continent}: ${answer.node}`;
     endgameNodeLink.href = answer.link || '#';
 
     endgameHintImage.src = hintImageSrc;
