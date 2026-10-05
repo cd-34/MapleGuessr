@@ -104,7 +104,31 @@ export const continents = [
         mapImage: 'maps/aqua-road.webp',
         mapBounds: [[0, 0], [470, 640]],
         nodes: [
-            { id: 'temp', center: [85, 117], radius: 25, type: 'town' }
+            { id: 'Ocean I.C', center: [120, 91], radius: 15, type: 'regular' },
+            { id: 'Crystal Gorge', center: [170, 101], radius: 15, type: 'regular' },
+            { id: 'Red Coral Forest', center: [215, 102], radius: 15, type: 'regular' },
+            { id: 'Snowy Whale\'s Island', center: [372, 150], radius: 15, type: 'regular' },
+            { id: 'Forked Road: West Sea', center: [256, 182], radius: 15, type: 'regular' },
+            { id: 'Deep Sea Gorge I', center: [178, 205], radius: 15, type: 'regular' },
+            { id: 'Deep Sea Gorge II', center: [122, 245], radius: 15, type: 'regular' },
+
+            { id: 'The Grave of a Wrecked Ship', center: [94, 326], radius: 15, type: 'regular' },
+
+            { id: 'The Dangerous Cave', center: [48, 255], radius: 15, type: 'regular' },
+            { id: 'The Cave of Pianus', center: [47, 180], radius: 15, type: 'regular' },
+
+            { id: 'Aquarium', center: [268, 328], radius: 15, type: 'town' },
+
+            { id: 'Forked Road: East Sea', center: [283, 486], radius: 15, type: 'regular' },
+            { id: 'Dangerous Sea Gorge I', center: [209, 448], radius: 15, type: 'regular' },
+            { id: 'Dangerous Sea Gorge II', center: [138, 442], radius: 15, type: 'regular' },
+            { id: 'The Seaweed Tower', center: [279, 524], radius: 15, type: 'regular' },
+            { id: 'Sand Castle Playground', center: [246, 533], radius: 15, type: 'regular' },
+            { id: 'Two Palm Trees', center: [372, 506], radius: 15, type: 'regular' },
+            { id: 'Big Fish Valley', center: [207, 527], radius: 15, type: 'regular' },
+            { id: 'Blue Seaweed Road', center: [185, 564], radius: 15, type: 'regular' },
+            { id: 'Mushroom Coral Hill', center: [150, 580], radius: 15, type: 'regular' },
+            { id: 'The Sharp Unknown', center: [114, 597], radius: 15, type: 'regular' }
         ]
     },
     {
