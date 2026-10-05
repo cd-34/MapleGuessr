@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Maplestory';
+    src: url('/fonts/Maplestory\ Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --primary-colour: #00022E;
     --node-color: #ffee55;
@@ -9,6 +16,8 @@
 
 h1, h2 {
     color: white;
+    font-family: Maplestory;
+    text-align: center;
 }
 
 /* temporary fix to have the cursor work on most of the web page */
@@ -25,6 +34,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    user-select: none;
 }
 
 body:active,
@@ -47,6 +57,12 @@ button:active {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#stats-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 #map {
@@ -124,6 +140,10 @@ button:active {
 button {
     padding: 8px 20px;
     cursor: url('cursor/point_click.cur') 0 0, auto; 
+    font-family: Maplestory;
+    font-size: 16px;
+    width: 150px;
+    height: 50px;
 }
 
 button:disabled {
