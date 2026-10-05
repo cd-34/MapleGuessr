@@ -36,7 +36,7 @@ const map = L.map('map', {
     // note that y axis should be inverted going from bottom to top
     minZoom: 0,
     maxZoom: 0,
-    dragging: false,
+    dragging: true,
     zoomControl: false,
     scrollWheelZoom: false,
     touchZoom: false,
@@ -56,6 +56,7 @@ function loadMap(imageUrl, bounds) {
     // console.log('added layer id: ', currentOverlay._leaflet_id);
     // console.log('current overlay after adding:', currentOverlay);
     map.setMaxBounds(bounds);
+    map.options.maxBoundsViscosity = 1.0;
     map.fitBounds(bounds);
 }
 
@@ -161,6 +162,7 @@ confirmButton.addEventListener('click', async () => {
 helpButton.addEventListener('click', () => {
     console.log(`elp ` + Date.now());
 })
+
 
 giveUpButton.addEventListener('click', () => {
     // #FEB2B2
