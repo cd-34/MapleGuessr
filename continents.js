@@ -22,7 +22,18 @@ export const continents = [
             { id: 'L Forest I', center: [215, 126], radius: 15, type: 'regular' },
             { id: 'Kerning City Construction Site', center: [243, 128], radius: 15, type: 'regular' },
 
+            { id: 'Kerning City', center: [107, 274], radius: 15, type: 'town' },
             
+            { id: 'The Swamp of Despair I', center: [274, 152], radius: 15, type: 'regular' },
+            { id: 'The Swamp of Despair II', center: [267, 182], radius: 15, type: 'regular' },
+            { id: 'The Swamp of Despair III', center: [241, 197], radius: 15, type: 'regular' },
+            { id: 'Dangerous Croko I', center: [219, 206], radius: 15, type: 'regular' },
+            { id: 'Dangerous Croko II', center: [203, 223], radius: 15, type: 'regular' },
+            { id: 'Sunset Sky', center: [306, 142], radius: 15, type: 'regular' },
+            { id: 'Construct Site North of Kerning City', center: [306, 170], radius: 15, type: 'regular' },
+            { id: 'West Domain of Perion', center: [307, 198], radius: 15, type: 'regular' },
+            { id: 'West Rocky Mountain I', center: [322, 210], radius: 15, type: 'regular' },
+            { id: 'West Street Corner of Perion', center: [348, 214], radius: 15, type: 'regular' },
 
             { id: 'Perion', center: [370, 252], radius: 15, type: 'town' },
 
@@ -55,9 +66,14 @@ export const continents = [
 
             { id: 'Henesys Hunting Ground I', center: [88, 249], radius: 15, type: 'regular' },
             { id: 'A Hill West of Henesys', center: [105, 220], radius: 15, type: 'regular' },
-            { id: 'Forest West of Henesys', center: [139, 205], radius: 15, type: 'regular' }
+            { id: 'Forest West of Henesys', center: [139, 205], radius: 15, type: 'regular' },
             
-
+            { id: 'Florina Beach', center: [88, 536], radius: 15, type: 'town' },
+            
+            { id: 'A Look-Out Shed Around the Beach', center: [95, 560], radius: 15, type: 'regular' },
+            { id: 'Lorang, Lorang', center: [108, 577], radius: 15, type: 'regular' },
+            { id: 'Lorang and Clang', center: [137, 575], radius: 15, type: 'regular' },
+            { id: 'Hot Sand', center: [139, 550], radius: 15, type: 'regular' }
         ]
     },
     {
