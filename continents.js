@@ -196,7 +196,41 @@ export const continents = [
         mapImage: 'maps/mu-lung-garden.webp',
         mapBounds: [[0, 0], [470, 640]],
         nodes: [
-            { id: 'temp', center: [83, 117], radius: 25, type: 'town' }
+            { id: 'Mu Lung', center: [324, 468], radius: 15, type: 'town' },
+            { id: 'Mu Lung Temple', center: [324, 490], radius: 15, type: 'town' },
+            { id: 'Practice Field: Beginner', center: [314, 541], radius: 15, type: 'regular' },
+            { id: 'Practice Field: Easy Level', center: [285, 541], radius: 15, type: 'regular' },
+            { id: 'Practice Field: Normal Level', center: [250, 536], radius: 15, type: 'regular' },
+            { id: 'Practice Field: Advanced Level', center: [222, 560], radius: 15, type: 'regular' },
+            { id: 'Entrance to Sky Forest', center: [298, 389], radius: 15, type: 'regular' },
+            { id: 'Sky Forest: The Trail', center: [279, 355], radius: 15, type: 'regular' },
+            { id: 'Deep in the Sky Forest', center: [282, 310], radius: 15, type: 'regular' },
+            { id: 'Snake Area', center: [292, 272], radius: 15, type: 'regular' },
+            { id: 'Wild Bear Area 1', center: [310, 273], radius: 15, type: 'regular' },
+            { id: 'Wild Bear Area 2', center: [321, 257], radius: 15, type: 'regular' },
+            { id: 'Wild Bear Area 3', center: [326, 243], radius: 15, type: 'regular' },
+            { id: 'Territory of the Wandering Bear', center: [343, 228], radius: 15, type: 'regular' },
+
+            { id: 'Where the Sky Forest Ends', center: [262, 225], radius: 15, type: 'regular' },
+            { id: 'Peach Farm 1', center: [251, 180], radius: 15, type: 'regular' },
+            { id: 'Foggy Forest', center: [235, 202], radius: 15, type: 'regular' },
+            { id: 'Virtuous Forest', center: [215, 232], radius: 15, type: 'regular' },
+            { id: 'Goblin Forest 1', center: [185, 224], radius: 15, type: 'regular' },
+
+            { id: 'Peach Farm 2', center: [221, 135], radius: 15, type: 'regular' },
+            { id: 'Peach Farm 3', center: [172, 133], radius: 15, type: 'regular' },
+            { id: 'Isolated Swamp', center: [117, 195], radius: 15, type: 'regular' },
+            { id: 'Red-Nose Pirate Den 3', center: [73, 126], radius: 15, type: 'regular' },
+            { id: 'Red-Nose Pirate Den 2', center: [54, 152], radius: 15, type: 'regular' },
+            { id: 'Red-Nose Pirate Den 1', center: [48, 181], radius: 15, type: 'regular' },
+
+            { id: 'Old Swamp', center: [110, 247], radius: 15, type: 'regular' },
+            { id: 'Bellflower Valley', center: [78, 284], radius: 15, type: 'regular' },
+            { id: '100-Year Old Herb Garden', center: [90, 346], radius: 15, type: 'regular' },
+            { id: '50-Year Old Herb Garden', center: [114, 433], radius: 15, type: 'regular' },
+            { id: '10-Year Old Herb Garden', center: [93, 468], radius: 15, type: 'regular' },
+            { id: 'Herb Town', center: [100, 508], radius: 15, type: 'regular' },
+            { id: 'Pier on the Beach', center: [138, 541], radius: 15, type: 'regular' }
         ]
     },
     {
