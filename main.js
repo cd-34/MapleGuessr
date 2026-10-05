@@ -1,7 +1,7 @@
 import { loadTodaysPuzzle, checkGuess, submitFinalResult, loadStats, fetchAnswer } from './api.js';
 import { currentMarkers, clearMarkers, addContinentMarkers, addGuessNodeMarkers } from './markers.js';
 import { continents } from './continents.js';
-import { showEndGameModal } from './endgame.js';
+import { showEndGameModal, openStatsView } from './endgame.js';
 
 // track current map state so that old markers don't linger when swapping maps
 let currentOverlay = null;
@@ -147,7 +147,7 @@ confirmButton.addEventListener('click', async () => {
         gameOver = true;
         const won = result === 'correct';
         await submitFinalResult(won ? guesses.length : 0);
-        await showEndGameModal(won, guesses.length, hintImage.src, generateShareText, showCopyPopup);
+        await showEndGameModal(won, guesses.length, hintImage.src, generateShareText);
     }
 
     pendingGuess = null;
@@ -175,14 +175,8 @@ function showCopyPopup(message = 'Copied to clipboard!') {
 }
 
 shareButton.addEventListener('click', () => {
-    const text = generateShareText();
-    navigator.clipboard.writeText(text)
-        .then(() => showCopyPopup('Copied to clipboard!')
-    );
-    copyPopup.classList.toggle("show");
-    console.log('copied');
-    // popup here
-})
+    openStatsView();
+});
 
 // returns todays date as a string for finding the correct hint file
 function getTodaysDate() {
@@ -221,8 +215,8 @@ function generateShareText() {
         : `X/${MAX_GUESSES}`;
 
     // console.log(`${getTodaysDate}`);
-    console.log(`MapleGuessr: ${todaysDate}\nhttps:mapleguessr.com\n${score}\n${shareString}`);
-    return `MapleGuessr: ${todaysDate}\nhttps:mapleguessr.com\n${score}\n${shareString}`;
+    console.log(`MapleGuessr: ${todaysDate}\nhttps://mapleguessr.com\n${score}\n${shareString}`);
+    return `MapleGuessr: ${todaysDate}\nhttps://mapleguessr.com\n${score}\n${shareString}`;
 }
 
 // new endpoint that reveals the full answer
