@@ -18,7 +18,7 @@ let todaysPuzzleMeta = null; // no answer
 
 const backButton = document.getElementById('back-button');
 const confirmButton = document.getElementById('confirm-button');
-const helpButton = document.getElementById('help-button');
+// const helpButton = document.getElementById('help-button');
 const giveUpButton = document.getElementById('give-up-button');
 const shareButton = document.getElementById('share-button');
 const copyPopup = document.getElementById('copy-popup');
@@ -35,7 +35,7 @@ const map = L.map('map', {
     crs: L.CRS.Simple, // maps longitude and latitude to x and y directly
     // note that y axis should be inverted going from bottom to top
     minZoom: 0,
-    maxZoom: 0,
+    maxZoom: 1,
     dragging: true,
     zoomControl: false,
     scrollWheelZoom: false,
@@ -159,9 +159,9 @@ confirmButton.addEventListener('click', async () => {
     updateButtonStates();
 });
 
-helpButton.addEventListener('click', () => {
-    console.log(`elp ` + Date.now());
-})
+// helpButton.addEventListener('click', () => {
+//     console.log(`elp ` + Date.now());
+// })
 
 
 giveUpButton.addEventListener('click', () => {
