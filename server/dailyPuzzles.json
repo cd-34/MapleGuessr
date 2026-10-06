@@ -1,8 +1,8 @@
 {
-    "2026-10-05": { "continent": "Victoria Island", "node": "Henesys Dungeon Entrance", "link": "https://meowdb.com/msclassic/maps/010001100" },
     "2026-10-06": { "continent": "Maple Island", "node": "Mushroom Town - West Entrance", "link": "https://meowdb.com/msclassic/maps/000000001" },
     "2026-10-07": { "continent": "Victoria Island", "node": "Thicket Around the Beach II", "link": "https://meowdb.com/msclassic/maps/010000012" },
     "2026-10-08": { "continent": "Victoria Island", "node": "3-Way Road-Split", "link": "https://meowdb.com/msclassic/maps/010000020" },
     "2026-10-09": { "continent": "Victoria Island", "node": "Ellinia", "link": "https://meowdb.com/msclassic/maps/010002000" },
-    "2026-10-10": { "continent": "Victoria Island", "node": "Deep Valley III", "link": "https://meowdb.com/msclassic/maps/010004120" }    
+    "2026-10-10": { "continent": "Victoria Island", "node": "Deep Valley III", "link": "https://meowdb.com/msclassic/maps/010004120" },  
+    "2026-10-11": { "continent": "Victoria Island", "node": "Henesys Dungeon Entrance", "link": "https://meowdb.com/msclassic/maps/010001100" }
 }
