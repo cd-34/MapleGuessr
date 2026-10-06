@@ -20,6 +20,13 @@ h1, h2 {
     text-align: center;
 }
 
+h1 {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    margin: 12px 0 8px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 /* temporary fix to have the cursor work on most of the web page */
 html, body {
     min-height: 100%;
