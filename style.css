@@ -263,6 +263,10 @@ might need to make smaller */
     margin-top: 10px;
 } */
 
+#give-up-button:hover {
+    background: #fc8a7d;
+}
+
 #giveup-overlay {
     display: none;
     position: fixed;
