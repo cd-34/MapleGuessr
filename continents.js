@@ -168,7 +168,7 @@ export const continents = [
             { id: 'Eos Tower 31st Floor', center: [193, 108], radius: 15, type: 'regular' },
             { id: 'Eos Tower 1st Floor', center: [153, 109], radius: 15, type: 'regular' },
 
-            { id: 'Omega Sector', center: [115, 111], radius: 15, type: 'town' },
+            { id: 'Omega Sector', center: [125, 109], radius: 15, type: 'town' },
             { id: 'Off-Limits', center: [94, 100], radius: 15, type: 'regular' },
             { id: 'Kulan Field I', center: [95, 118], radius: 15, type: 'regular' },
             { id: 'Kulan field II', center: [109, 141], radius: 15, type: 'regular' },
